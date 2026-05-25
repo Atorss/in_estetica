@@ -10,6 +10,7 @@
     <menuitem id="menu_in_estetica_core_root"
               name="Colaboradores"
               sequence="100"
+              web_icon="in_estetica_core,static/description/icon.png"
               groups="group_doctor,group_secretaria,group_administrador,base.group_system"/>
 
     <menuitem id="menu_colaboradores_root"

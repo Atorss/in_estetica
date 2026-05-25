@@ -52,30 +52,11 @@ $wobbe-display: 'Playfair Display', 'Times New Roman', serif;
 
     .o_menu_brand {
         font-family: $wobbe-font;
-        font-weight: 900;
-        letter-spacing: 3px;
+        font-weight: 700;
+        letter-spacing: 2px;
         color: $wobbe-white !important;
-        font-size: 0 !important;       // oculta el texto original
-        background-image: url('/in_estetica_backend_theme/static/img/wobbe_logo_full.jpg');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: left center;
-        padding-left: 110px !important; // ancho del logo
-        height: 38px;
-        min-width: 110px;
-        display: flex !important;
-        align-items: center;
-
-        &::after {
-            content: '';
-            display: inline-block;
-            width: 1px;
-            height: 18px;
-            background: $wobbe-platinum;
-            margin-left: 14px;
-            vertical-align: middle;
-            opacity: 0.5;
-        }
+        text-transform: uppercase;
+        font-size: 13px;
     }
 
     .o_menu_sections > .o-dropdown,

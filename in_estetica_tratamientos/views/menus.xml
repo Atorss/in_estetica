@@ -9,6 +9,7 @@
     <menuitem id="menu_tratamientos_root"
               name="Tratamientos"
               sequence="105"
+              web_icon="in_estetica_tratamientos,static/description/icon.png"
               groups="in_estetica_core.group_doctor,in_estetica_core.group_secretaria,in_estetica_core.group_administrador,base.group_system"/>
 
     <menuitem id="menu_tratamientos"

@@ -4,6 +4,7 @@
     <menuitem id="menu_in_estetica_control_root"
               name="Administración"
               sequence="100"
+              web_icon="in_estetica_control,static/description/icon.png"
               groups="group_innatum_admin"/>
 
     <menuitem id="menu_in_estetica_control_suscripciones"
