@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_wizard_agendar_sesion_form" model="ir.ui.view">
+        <field name="name">in_estetica.wizard_agendar_sesion.form</field>
+        <field name="model">in_estetica.wizard_agendar_sesion</field>
+        <field name="arch" type="xml">
+            <form string="Agendar siguiente sesión">
+                <field name="tratamiento_id" invisible="1"/>
+                <field name="turno_domain" invisible="1"/>
+                <field name="sin_disponibilidad" invisible="1"/>
+                <div class="alert alert-warning" role="alert"
+                     invisible="not sin_disponibilidad">
+                    No hay turnos disponibles para este médico. Genera más
+                    turnos aprobando una planificación.
+                </div>
+                <group invisible="sin_disponibilidad">
+                    <group>
+                        <field name="paciente_id"/>
+                        <field name="doctor_id"/>
+                        <field name="proxima_tentativa"/>
+                    </group>
+                    <group>
+                        <field name="tipo_cita_id" options="{'no_create': True}"/>
+                        <field name="fecha"/>
+                        <field name="turno_id" domain="turno_domain"
+                               options="{'no_create': True}"
+                               readonly="not fecha"/>
+                    </group>
+                </group>
+                <div class="alert alert-info" role="alert"
+                     invisible="sin_disponibilidad">
+                    Elige una fecha (solo aparecen las que tienen turnos libres)
+                    y luego el horario. Se reservará a nombre del paciente y
+                    quedará vinculado a este tratamiento.
+                </div>
+                <footer>
+                    <button name="action_confirmar" type="object"
+                            string="Reservar turno" class="btn-primary"
+                            invisible="sin_disponibilidad"/>
+                    <button special="cancel" string="Cancelar" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

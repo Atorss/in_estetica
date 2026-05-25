@@ -86,10 +86,39 @@ class InEsteticaPaciente(models.Model):
     cirugias = fields.Text(string='Cirugías / procedimientos previos')
     notas = fields.Text(string='Notas')
 
+    # --- Turnos separados (reservados/confirmados) — solo lectura ---
+    turno_ids = fields.One2many(
+        'in_estetica.turno', 'paciente_id', string='Turnos agendados',
+        domain=[('state', 'in', ('reserved', 'confirmed', 'in_progress'))],
+    )
+    turno_historico_ids = fields.One2many(
+        'in_estetica.turno', 'paciente_id', string='Turnos atendidos',
+        domain=[('state', '=', 'done')],
+    )
+    turno_count = fields.Integer(
+        string='Turnos agendados', compute='_compute_turno_count',
+    )
+
     company_id = fields.Many2one(
         'res.company', string='Empresa', required=True,
         default=lambda self: self.env.company, index=True,
     )
+
+    @api.depends('turno_ids')
+    def _compute_turno_count(self):
+        for rec in self:
+            rec.turno_count = len(rec.turno_ids)
+
+    def action_ver_turnos(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Turnos de %s') % self.name,
+            'res_model': 'in_estetica.turno',
+            'view_mode': 'list,calendar,form',
+            'domain': [('paciente_id', '=', self.id)],
+            'context': {'default_paciente_id': self.id},
+        }
 
     # ------------------------------------------------------------------
 

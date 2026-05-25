@@ -50,6 +50,12 @@ class InEsteticaTratamiento(models.Model):
     sesion_ids = fields.One2many(
         'in_estetica.tratamiento.sesion', 'tratamiento_id', string='Sesiones',
     )
+    # Turnos pendientes (reservados/confirmados/en curso) del paciente —
+    # espejo de los turnos agendados del paciente, solo lectura.
+    turno_pendiente_ids = fields.One2many(
+        related='paciente_id.turno_ids',
+        string='Turnos pendientes del paciente', readonly=True,
+    )
 
     sesiones_realizadas = fields.Integer(
         string='Sesiones realizadas', compute='_compute_progreso', store=True,
@@ -143,9 +149,10 @@ class InEsteticaTratamiento(models.Model):
             if rec.state in ('pausado', 'cancelado'):
                 continue
             if rec.sesiones_totales and rec.sesiones_realizadas >= rec.sesiones_totales:
-                rec.state = ('mantenimiento'
-                             if rec.tipo_tratamiento_id.requiere_retoque
-                             else 'completado')
+                # Concluyó el total de sesiones → Completado.
+                # (Si el tipo requiere retoque, el recordatorio igual se
+                #  dispara por proxima_sesion_fecha aunque esté completado.)
+                rec.state = 'completado'
             else:
                 rec.state = 'en_curso'
 
@@ -186,22 +193,18 @@ class InEsteticaTratamiento(models.Model):
     # ------------------------------------------------------------------
 
     def action_agendar_siguiente(self):
-        """Abre el formulario de turno con paciente/médico/fecha precargados
-        para la próxima sesión."""
+        """Abre el asistente para CONSUMIR un turno ya planificado (slot
+        disponible) y reservarlo para la siguiente sesión del tratamiento.
+        No crea turnos sueltos: se eligen de los generados por la planificación.
+        """
         self.ensure_one()
-        ctx = {
-            'default_paciente_id': self.paciente_id.id,
-            'default_tratamiento_id': self.id,
-        }
-        if self.doctor_id:
-            ctx['default_doctor_id'] = self.doctor_id.id
         return {
             'type': 'ir.actions.act_window',
             'name': _('Agendar sesión — %s') % self.paciente_id.name,
-            'res_model': 'in_estetica.turno',
+            'res_model': 'in_estetica.wizard_agendar_sesion',
             'view_mode': 'form',
-            'target': 'current',
-            'context': ctx,
+            'target': 'new',
+            'context': {'default_tratamiento_id': self.id},
         }
 
     def action_pausar(self):
@@ -214,6 +217,19 @@ class InEsteticaTratamiento(models.Model):
 
     def action_cancelar(self):
         self.write({'state': 'cancelado'})
+
+    def action_agregar_sesiones(self):
+        """Abre el asistente para sumar más sesiones a un tratamiento que
+        ya se completó pero el paciente requiere continuar."""
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Agregar más sesiones'),
+            'res_model': 'in_estetica.wizard_agregar_sesiones',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_tratamiento_id': self.id},
+        }
 
     # ------------------------------------------------------------------
     # Recordatorios
@@ -258,7 +274,7 @@ class InEsteticaTratamiento(models.Model):
         hoy = fields.Date.today()
         limite = hoy + timedelta(days=dias_anticipacion)
         candidatos = self.search([
-            ('state', 'in', ('en_curso', 'mantenimiento')),
+            ('state', 'not in', ('pausado', 'cancelado')),
             ('proxima_sesion_fecha', '!=', False),
             ('proxima_sesion_fecha', '<=', limite),
         ])

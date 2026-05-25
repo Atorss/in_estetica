@@ -25,6 +25,13 @@
         <field name="arch" type="xml">
             <form string="Paciente">
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_ver_turnos" type="object"
+                                class="oe_stat_button" icon="fa-calendar-check-o">
+                            <field name="turno_count" widget="statinfo"
+                                   string="Turnos agendados"/>
+                        </button>
+                    </div>
                     <field name="image_1920" widget="image" class="oe_avatar"
                            options="{'preview_image': 'image_128'}"/>
                     <div class="oe_title">
@@ -84,6 +91,38 @@
                                 <field name="cirugias"
                                        placeholder="Cirugías o procedimientos previos"/>
                             </group>
+                        </page>
+                        <page string="Turnos agendados" name="turnos">
+                            <field name="turno_ids" readonly="1">
+                                <list string="Turnos separados" create="0" edit="0">
+                                    <field name="name"/>
+                                    <field name="fecha_hora"/>
+                                    <field name="tipo_cita_id"/>
+                                    <field name="doctor_id"/>
+                                    <field name="state" widget="badge"
+                                           decoration-info="state == 'reserved'"
+                                           decoration-success="state == 'confirmed'"
+                                           decoration-warning="state == 'in_progress'"/>
+                                </list>
+                            </field>
+                            <p class="text-muted">
+                                Solo lectura. Muestra los turnos que el paciente ya tiene
+                                separados (reservados, confirmados o en curso).
+                            </p>
+                        </page>
+                        <page string="Historial de turnos" name="historial">
+                            <field name="turno_historico_ids" readonly="1">
+                                <list string="Turnos atendidos" create="0" edit="0">
+                                    <field name="name"/>
+                                    <field name="fecha_hora"/>
+                                    <field name="tipo_cita_id"/>
+                                    <field name="doctor_id"/>
+                                    <field name="state" widget="badge"/>
+                                </list>
+                            </field>
+                            <p class="text-muted">
+                                Solo lectura. Turnos ya atendidos del paciente.
+                            </p>
                         </page>
                         <page string="Notas" name="notas">
                             <field name="notas" nolabel="1"

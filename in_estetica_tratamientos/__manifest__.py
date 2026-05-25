@@ -38,6 +38,8 @@
         'views/in_estetica_tratamiento_views.xml',
         'views/in_estetica_sesion_views.xml',
         'views/in_estetica_turno_inherit_views.xml',
+        'views/in_estetica_wizard_agendar_sesion_views.xml',
+        'views/in_estetica_wizard_agregar_sesiones_views.xml',
         'views/menus.xml',
     ],
     'installable': True,

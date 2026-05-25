@@ -72,6 +72,10 @@
                     <button name="action_agendar_siguiente" type="object"
                             string="Agendar siguiente sesión" class="btn-primary"
                             invisible="state in ('completado','cancelado')"/>
+                    <button name="action_agregar_sesiones" type="object"
+                            string="Agregar más sesiones" class="btn-primary"
+                            invisible="state != 'completado'"
+                            help="Suma sesiones si el paciente requiere continuar el tratamiento."/>
                     <button name="action_pausar" type="object" string="Pausar"
                             invisible="state != 'en_curso'"/>
                     <button name="action_reactivar" type="object" string="Reactivar"
@@ -120,6 +124,25 @@
                                     <field name="state" widget="badge"/>
                                 </list>
                             </field>
+                        </page>
+                        <page string="Turnos pendientes del paciente">
+                            <field name="turno_pendiente_ids" readonly="1">
+                                <list string="Turnos pendientes" create="0" edit="0">
+                                    <field name="name"/>
+                                    <field name="fecha_hora"/>
+                                    <field name="tipo_cita_id"/>
+                                    <field name="doctor_id"/>
+                                    <field name="tratamiento_id" optional="show"/>
+                                    <field name="state" widget="badge"
+                                           decoration-info="state == 'reserved'"
+                                           decoration-success="state == 'confirmed'"
+                                           decoration-warning="state == 'in_progress'"/>
+                                </list>
+                            </field>
+                            <p class="text-muted">
+                                Solo lectura. Turnos que el paciente ya tiene separados
+                                (de este u otro tratamiento).
+                            </p>
                         </page>
                         <page string="Notas">
                             <field name="notas" nolabel="1" placeholder="Notas internas del tratamiento"/>
