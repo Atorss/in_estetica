@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- =====================================================================
+         Reemplaza el dropdown del boton "Ir a aplicaciones de Odoo" (frontend)
+         por una version que agrupa los apps segun ir.ui.menu.group (igual que
+         el sidebar de MuK appsbar en el backend).
+         ===================================================================== -->
+    <template id="wobbe_frontend_apps_dropdown"
+              name="Wobbe - Dropdown de apps agrupado"
+              inherit_id="website.layout">
+
+        <xpath expr="//div[hasclass('o_frontend_to_backend_apps_menu')]" position="replace">
+            <div class="dropdown-menu o_frontend_to_backend_apps_menu wobbe-apps-menu" role="menu">
+                <t t-set="all_menus" t-value="env['ir.ui.menu'].with_context(force_action=True).load_menus_root()['children']"/>
+                <t t-set="all_menus_by_id" t-value="{m['id']: m for m in all_menus}"/>
+                <t t-set="menus_in_groups" t-value="set()"/>
+
+                <!-- 1. Iterar grupos root (sin parent) por sequence -->
+                <t t-foreach="env['ir.ui.menu.group'].sudo().search([('parent_id', '=', False), ('active', '=', True)], order='sequence, id')"
+                   t-as="group">
+                    <t t-set="group_menus" t-value="[m for m in group.menu_ids.sudo() if m.id in all_menus_by_id]"/>
+                    <t t-if="group_menus">
+                        <h6 class="dropdown-header wobbe-apps-menu__group" t-esc="group.name"/>
+                        <t t-foreach="group_menus" t-as="m">
+                            <t t-set="menu_dict" t-value="all_menus_by_id.get(m.id)"/>
+                            <t t-if="menu_dict">
+                                <a role="menuitem"
+                                   class="dropdown-item wobbe-apps-menu__item"
+                                   t-att-href="'/odoo/action-' + (menu_dict['action'].split(',')[1] if menu_dict.get('action') else '')">
+                                    <span t-esc="menu_dict['name']"/>
+                                </a>
+                                <t t-set="_dummy" t-value="menus_in_groups.add(m.id)"/>
+                            </t>
+                        </t>
+                    </t>
+                </t>
+
+                <!-- 2. Menus que NO estan en ningun grupo -->
+                <t t-set="ungrouped" t-value="[m for m in all_menus if m['id'] not in menus_in_groups]"/>
+                <t t-if="ungrouped">
+                    <h6 class="dropdown-header wobbe-apps-menu__group">Otros</h6>
+                    <a role="menuitem"
+                       class="dropdown-item wobbe-apps-menu__item"
+                       t-foreach="ungrouped" t-as="menu"
+                       t-att-href="'/odoo/action-' + (menu['action'].split(',')[1] if menu.get('action') else '')">
+                        <span t-esc="menu['name']"/>
+                    </a>
+                </t>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

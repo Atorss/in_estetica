@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        Menú raíz "Colaboradores" dentro del grupo MUK "Administración
+        Estética". Acceso: médico estético, secretaria y administrador,
+        más base.group_system para soporte técnico.
+    -->
+
+    <menuitem id="menu_in_estetica_core_root"
+              name="Colaboradores"
+              sequence="100"
+              groups="group_doctor,group_secretaria,group_administrador,base.group_system"/>
+
+    <menuitem id="menu_colaboradores_root"
+              name="Listado"
+              parent="menu_in_estetica_core_root"
+              action="action_hr_employee_colaborador"
+              sequence="10"/>
+
+    <menuitem id="menu_nuevo_colaborador"
+              name="Nuevo Colaborador"
+              parent="menu_in_estetica_core_root"
+              action="action_hr_employee_colaborador_open_wizard"
+              sequence="20"
+              groups="group_administrador,base.group_system"/>
+
+</odoo>

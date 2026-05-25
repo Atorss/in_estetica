@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_planificacion_list" model="ir.ui.view">
+        <field name="name">in_estetica.planificacion.list</field>
+        <field name="model">in_estetica.planificacion</field>
+        <field name="arch" type="xml">
+            <list string="Planificaciones"
+                  decoration-success="state == 'approved'"
+                  decoration-muted="state == 'cancelled'">
+                <field name="name"/>
+                <field name="doctor_id"/>
+                <field name="fecha_inicio"/>
+                <field name="fecha_fin"/>
+                <field name="duracion_turno" string="Duración (min)"/>
+                <field name="turno_count" string="# Turnos"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'approved'"
+                       decoration-muted="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_planificacion_form" model="ir.ui.view">
+        <field name="name">in_estetica.planificacion.form</field>
+        <field name="model">in_estetica.planificacion</field>
+        <field name="arch" type="xml">
+            <form string="Planificación">
+                <header>
+                    <button name="action_aprobar" type="object"
+                            string="Aprobar y generar turnos"
+                            class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="action_cancelar" type="object"
+                            string="Cancelar"
+                            invisible="state != 'approved'"
+                            confirm="¿Cancelar planificación? Los turnos DISPONIBLES generados también se cancelarán. Los reservados/confirmados se preservan."/>
+                    <button name="action_volver_a_borrador" type="object"
+                            string="Volver a borrador"
+                            invisible="state != 'cancelled'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,approved,cancelled"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_ver_turnos" type="object"
+                                class="oe_stat_button" icon="fa-calendar">
+                            <field name="turno_count" widget="statinfo"
+                                   string="Turnos"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="doctor_id"
+                                   readonly="state != 'draft'"
+                                   options="{'no_create': True}"/>
+                            <field name="company_id"
+                                   groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="fecha_inicio"
+                                   readonly="state != 'draft'"/>
+                            <field name="fecha_fin"
+                                   readonly="state != 'draft'"/>
+                            <field name="duracion_turno"
+                                   readonly="state != 'draft'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Tramos">
+                            <field name="linea_ids"
+                                   readonly="state != 'draft'">
+                                <list editable="bottom" string="Tramos">
+                                    <field name="lunes" widget="boolean_toggle"/>
+                                    <field name="martes" widget="boolean_toggle"/>
+                                    <field name="miercoles" widget="boolean_toggle"/>
+                                    <field name="jueves" widget="boolean_toggle"/>
+                                    <field name="viernes" widget="boolean_toggle"/>
+                                    <field name="sabado" widget="boolean_toggle"/>
+                                    <field name="domingo" widget="boolean_toggle"/>
+                                    <field name="hora_inicio" widget="float_time"/>
+                                    <field name="hora_fin" widget="float_time"/>
+                                    <field name="turnos_por_dia"
+                                           string="Slots/día" readonly="1"/>
+                                </list>
+                            </field>
+                            <div class="text-muted mt-2">
+                                <i class="fa fa-info-circle"/>
+                                Cada tramo: marca uno o más días + horario. La duración de cada slot la define la <b>Duración turno</b> de arriba.
+                            </div>
+                        </page>
+                        <page string="Notas">
+                            <field name="notas" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_planificacion" model="ir.actions.act_window">
+        <field name="name">Planificaciones</field>
+        <field name="res_model">in_estetica.planificacion</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Sin planificaciones aún</p>
+            <p>Crea una para definir el rango de fechas, la duración del turno y los tramos del doctor. Al aprobar se generan los turnos automáticamente.</p>
+        </field>
+    </record>
+
+</odoo>

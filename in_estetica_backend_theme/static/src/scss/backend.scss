@@ -1,0 +1,594 @@
+// ============================================================
+// RENOVA Backend Theme - Estilos custom
+// ============================================================
+
+// Paleta plum + magenta + coral (RENOVA estetica)
+$wobbe-black:          #2b1a2e;
+$wobbe-ink:            #3a2540;
+$wobbe-charcoal:       #432b49;
+$wobbe-graphite:       #5a4560;
+$wobbe-stone:          #9c8a99;
+$wobbe-platinum:       #b63a6c;
+$wobbe-platinum-light: #e58cb0;
+$wobbe-platinum-dark:  #7e2a52;
+$wobbe-champagne:      #ef8a6b;
+$wobbe-cream:          #fdf6f4;
+$wobbe-bone:           #fbeef0;
+$wobbe-white:          #ffffff;
+$wobbe-divider:        #f0e3ea;
+
+$wobbe-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$wobbe-display: 'Playfair Display', 'Times New Roman', serif;
+
+// ===== TIPOGRAFIA GLOBAL =====
+.o_web_client,
+.o_action_manager,
+.o_main_navbar,
+.o_field_widget,
+.o_form_view,
+.o_list_view,
+.o_kanban_view {
+    font-family: $wobbe-font;
+    -webkit-font-smoothing: antialiased;
+}
+
+// ===== NAVBAR PRINCIPAL =====
+.o_main_navbar {
+    background-color: $wobbe-black !important;
+    border-bottom: 1px solid rgba($wobbe-platinum, 0.15);
+    min-height: 48px;
+    height: 48px;
+
+    .o_navbar_apps_menu,
+    .o_menu_brand,
+    .o_navbar_apps_menu > button {
+        color: $wobbe-white !important;
+        font-family: $wobbe-font;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-size: 12px;
+    }
+
+    .o_menu_brand {
+        font-family: $wobbe-font;
+        font-weight: 900;
+        letter-spacing: 3px;
+        color: $wobbe-white !important;
+        font-size: 0 !important;       // oculta el texto original
+        background-image: url('/in_estetica_backend_theme/static/img/wobbe_logo_full.jpg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: left center;
+        padding-left: 110px !important; // ancho del logo
+        height: 38px;
+        min-width: 110px;
+        display: flex !important;
+        align-items: center;
+
+        &::after {
+            content: '';
+            display: inline-block;
+            width: 1px;
+            height: 18px;
+            background: $wobbe-platinum;
+            margin-left: 14px;
+            vertical-align: middle;
+            opacity: 0.5;
+        }
+    }
+
+    .o_menu_sections > .o-dropdown,
+    .o_menu_sections > a {
+        color: $wobbe-platinum-light !important;
+        font-weight: 500;
+        font-size: 12px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        transition: color 0.2s ease, background-color 0.2s ease;
+
+        &:hover, &.show, &.active {
+            color: $wobbe-white !important;
+            background-color: rgba($wobbe-platinum, 0.1) !important;
+        }
+    }
+
+    .o_user_menu {
+        button { color: $wobbe-white !important; }
+    }
+
+    // Iconos
+    .fa, i { color: inherit; }
+}
+
+// ===== CONTROL PANEL (breadcrumb + acciones) =====
+.o_control_panel {
+    background: $wobbe-white;
+    border-bottom: 1px solid $wobbe-divider;
+
+    .breadcrumb-item {
+        font-family: $wobbe-font;
+        font-size: 13px;
+        font-weight: 500;
+        color: $wobbe-graphite;
+
+        &.active {
+            color: $wobbe-black;
+            font-weight: 700;
+        }
+
+        a {
+            color: $wobbe-stone;
+
+            &:hover { color: $wobbe-black; }
+        }
+    }
+}
+
+// ===== BOTONES =====
+.btn-primary {
+    background-color: $wobbe-black !important;
+    border-color: $wobbe-black !important;
+    color: $wobbe-white !important;
+    font-family: $wobbe-font;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 0;
+    padding: 8px 22px;
+    transition: all 0.25s ease;
+
+    &:hover, &:focus, &:active {
+        background-color: $wobbe-charcoal !important;
+        border-color: $wobbe-charcoal !important;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 14px rgba($wobbe-black, 0.25);
+    }
+}
+
+.btn-secondary {
+    background-color: $wobbe-white !important;
+    border: 1px solid $wobbe-divider !important;
+    color: $wobbe-black !important;
+    font-family: $wobbe-font;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 0;
+
+    &:hover {
+        background-color: $wobbe-bone !important;
+        border-color: $wobbe-black !important;
+    }
+}
+
+.btn-link {
+    color: $wobbe-charcoal !important;
+
+    &:hover { color: $wobbe-black !important; }
+}
+
+// Botones de "Create" en breadcrumb
+.o_form_button_create,
+.o_list_button_add,
+.o-kanban-button-new {
+    background: $wobbe-black !important;
+    color: $wobbe-white !important;
+    border-color: $wobbe-black !important;
+}
+
+// ===== FORM VIEW =====
+.o_form_view {
+    background: $wobbe-bone;
+
+    .o_form_sheet_bg {
+        background: $wobbe-bone;
+        padding: 0 !important;
+    }
+
+    .o_form_sheet {
+        background: $wobbe-white;
+        border: 1px solid $wobbe-divider;
+        box-shadow: 0 1px 3px rgba($wobbe-black, 0.04);
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 32px 40px !important;
+    }
+
+
+    .o_form_statusbar {
+        background: $wobbe-white;
+        border-bottom: 1px solid $wobbe-divider;
+
+        .o_statusbar_status {
+            .btn {
+                font-family: $wobbe-font;
+                font-weight: 600;
+                font-size: 11px;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                color: $wobbe-stone;
+
+                &.btn-primary,
+                &.o_arrow_button_current {
+                    background: $wobbe-black !important;
+                    color: $wobbe-white !important;
+                    border-color: $wobbe-black !important;
+                }
+            }
+        }
+    }
+
+    .o_field_widget input[type="text"],
+    .o_field_widget input[type="number"],
+    .o_field_widget input[type="email"],
+    .o_field_widget input[type="tel"],
+    .o_field_widget input[type="password"],
+    .o_field_widget textarea,
+    .o_field_widget select {
+        border: 1px solid $wobbe-divider !important;
+        background: $wobbe-white !important;
+        font-family: $wobbe-font;
+        transition: border-color 0.2s ease;
+
+        &:focus {
+            border-color: $wobbe-black !important;
+            box-shadow: 0 0 0 2px rgba($wobbe-black, 0.05) !important;
+        }
+    }
+
+    label, .o_form_label {
+        font-family: $wobbe-font;
+        font-size: 11px;
+        font-weight: 600;
+        color: $wobbe-graphite;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .o_horizontal_separator,
+    h2.o_horizontal_separator {
+        font-family: $wobbe-display;
+        font-size: 20px;
+        font-weight: 600;
+        color: $wobbe-black;
+        text-transform: none;
+        letter-spacing: -0.3px;
+        border-bottom: 1px solid $wobbe-divider;
+        padding-bottom: 8px;
+        margin-bottom: 16px;
+    }
+
+    .o_notebook {
+        > .o_notebook_headers {
+            border-bottom: 1px solid $wobbe-divider;
+
+            .nav-link {
+                font-family: $wobbe-font;
+                font-size: 11px;
+                font-weight: 700;
+                color: $wobbe-stone;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                border: none;
+                padding: 12px 18px;
+                position: relative;
+
+                &.active {
+                    color: $wobbe-black;
+                    background: transparent;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        bottom: -1px;
+                        left: 0;
+                        right: 0;
+                        height: 2px;
+                        background: $wobbe-black;
+                    }
+                }
+
+                &:hover:not(.active) { color: $wobbe-charcoal; }
+            }
+        }
+    }
+}
+
+// ===== LIST VIEW =====
+.o_list_view {
+    background: rgba($wobbe-white, 0.94);
+    width: 100% !important;
+    max-width: 100% !important;
+
+    table.o_list_table {
+        thead {
+            background: $wobbe-bone;
+            border-bottom: 1px solid $wobbe-divider;
+
+            th {
+                font-family: $wobbe-font;
+                font-size: 11px;
+                font-weight: 700;
+                color: $wobbe-graphite;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                padding: 12px 8px;
+                border-color: $wobbe-divider;
+            }
+        }
+
+        tbody tr {
+            transition: background-color 0.15s ease;
+
+            &:hover { background: $wobbe-bone; }
+
+            &.o_data_row_selected { background: rgba($wobbe-platinum, 0.15); }
+        }
+
+        td {
+            font-size: 13px;
+            color: $wobbe-ink;
+            padding: 10px 8px;
+            border-color: $wobbe-divider;
+        }
+    }
+}
+
+// ===== KANBAN =====
+.o_kanban_view {
+    background: transparent;
+    width: 100% !important;
+    max-width: 100% !important;
+
+    .o_kanban_record {
+        background: $wobbe-white;
+        border: 1px solid $wobbe-divider;
+        border-radius: 0;
+        box-shadow: 0 1px 3px rgba($wobbe-black, 0.04);
+        transition: all 0.25s ease;
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba($wobbe-black, 0.08);
+            border-color: $wobbe-charcoal;
+        }
+    }
+
+    .o_kanban_group {
+        background: transparent;
+    }
+}
+
+// ===== SEARCH BAR =====
+.o_searchview {
+    background: $wobbe-white;
+    border: 1px solid $wobbe-divider;
+
+    input {
+        font-family: $wobbe-font;
+        color: $wobbe-ink;
+    }
+}
+
+// ===== APPSBAR / SIDEBAR LATERAL MuK =====
+.mk_apps_sidebar_panel {
+    background-color: $wobbe-black !important;
+    border-right: 1px solid rgba($wobbe-platinum, 0.15) !important;
+
+    .mk_apps_sidebar {
+        .sidebar_toggle {
+            a {
+                color: $wobbe-platinum-light !important;
+                border-radius: 0 !important;
+
+                &:hover {
+                    background: rgba($wobbe-platinum, 0.12) !important;
+                    color: $wobbe-white !important;
+                }
+            }
+        }
+
+        .mk_apps_sidebar_menu {
+            // Texto de items
+            > li > a,
+            > li > div.nav-link,
+            .open_sidebar-link,
+            .sidebar_app_name,
+            .menu_dropdown a.nav-link,
+            .menu_dropdown_sub a.nav-link {
+                color: $wobbe-platinum-light !important;
+                font-family: $wobbe-font !important;
+                font-size: 12px !important;
+                font-weight: 500 !important;
+                letter-spacing: 0.5px !important;
+            }
+
+            // Hover en niveles superiores
+            > li:hover > a,
+            > li:hover > div.nav-link {
+                background: rgba($wobbe-platinum, 0.1) !important;
+                color: $wobbe-white !important;
+            }
+
+            > li.active > a {
+                background: rgba($wobbe-platinum, 0.18) !important;
+                color: $wobbe-white !important;
+                border-left: 2px solid $wobbe-platinum !important;
+            }
+
+            // Bordes laterales de niveles
+            > li.first_level > .open_sidebar-link {
+                border-left-color: transparent !important;
+
+                &:hover {
+                    background: rgba($wobbe-platinum, 0.1) !important;
+                    border-left-color: $wobbe-platinum !important;
+                    color: $wobbe-white !important;
+                }
+            }
+
+            li.second_level > .open_sidebar-link {
+                border-left-color: rgba($wobbe-platinum, 0.15) !important;
+
+                &:hover {
+                    background: rgba($wobbe-platinum, 0.08) !important;
+                    border-left-color: $wobbe-platinum !important;
+                }
+            }
+
+            // Apps anidados (menu_dropdown)
+            .menu_dropdown a.nav-link,
+            .menu_dropdown_sub a.nav-link {
+                border-left: 3px solid transparent !important;
+
+                &:hover {
+                    background: rgba($wobbe-platinum, 0.1) !important;
+                    color: $wobbe-white !important;
+                    border-left-color: $wobbe-platinum !important;
+                }
+
+                &.active {
+                    background: rgba($wobbe-platinum, 0.18) !important;
+                    color: $wobbe-white !important;
+                    border-left-color: $wobbe-platinum !important;
+                    font-weight: 600 !important;
+                }
+            }
+
+            // Chevrons y indicadores
+            i.fa { color: $wobbe-platinum !important; }
+        }
+
+        .mk_apps_sidebar_logo {
+            opacity: 0.35;
+            filter: grayscale(100%) brightness(2);
+        }
+    }
+}
+
+// ===== CHATTER =====
+.o-mail-Chatter {
+    .o-mail-Message {
+        font-family: $wobbe-font;
+    }
+
+    .o-mail-Composer {
+        border-color: $wobbe-divider;
+
+        textarea { font-family: $wobbe-font; }
+    }
+}
+
+// ===== BADGES & TAGS =====
+.badge {
+    font-family: $wobbe-font;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 2px;
+}
+
+.o_tag,
+.o_tag_color_0 {
+    font-family: $wobbe-font;
+    font-weight: 600;
+    border-radius: 2px;
+}
+
+// ===== DROPDOWNS =====
+.dropdown-menu {
+    border: 1px solid $wobbe-divider;
+    border-radius: 0;
+    box-shadow: 0 12px 32px rgba($wobbe-black, 0.12);
+    font-family: $wobbe-font;
+
+    .dropdown-item {
+        font-size: 13px;
+        color: $wobbe-ink;
+        padding: 8px 16px;
+
+        &:hover, &:focus { background: $wobbe-bone; color: $wobbe-black; }
+        &.active { background: $wobbe-black; color: $wobbe-white; }
+    }
+}
+
+// ===== CUSTOM CURSOR (decorativo, no oculta el nativo) =====
+.wobbe-cursor,
+.wobbe-cursor__dot { display: none; }
+
+@media (pointer: fine) {
+    .wobbe-cursor {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 28px;
+        height: 28px;
+        border: 1px solid $wobbe-platinum;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 99999;
+        mix-blend-mode: difference;
+        transition: width 0.25s ease, height 0.25s ease, opacity 0.3s ease, background 0.25s ease, border-color 0.25s ease;
+        will-change: transform;
+    }
+
+    .wobbe-cursor__dot {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 6px;
+        height: 6px;
+        background: $wobbe-platinum;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 99999;
+        mix-blend-mode: difference;
+        transition: opacity 0.3s ease, transform 0.04s linear;
+    }
+
+    .wobbe-cursor.is-hover {
+        width: 52px;
+        height: 52px;
+        margin-left: -12px;
+        margin-top: -12px;
+        background: rgba($wobbe-platinum, 0.15);
+        border-color: $wobbe-platinum-light;
+    }
+}
+
+// ===== LOGIN PAGE =====
+.oe_login_form,
+.oe_signup_form {
+    .form-control {
+        border: 1px solid $wobbe-divider !important;
+        border-radius: 0 !important;
+
+        &:focus {
+            border-color: $wobbe-black !important;
+            box-shadow: 0 0 0 2px rgba($wobbe-black, 0.05) !important;
+        }
+    }
+
+    .btn-primary {
+        background: $wobbe-platinum !important;
+        border-color: $wobbe-platinum !important;
+        border-radius: 8px;
+        text-transform: none;
+        letter-spacing: 0.2px;
+        &:hover { background: $wobbe-platinum-dark !important; border-color: $wobbe-platinum-dark !important; }
+    }
+}
+
+// ============================================================
+// Ocultar la "Apps Menu Footer Image" del appsbar MUK
+// (el cliente la encontro poco prolija sobre el menu)
+// ============================================================
+.mk_apps_sidebar_logo,
+.mk_apps_sidebar .sidebar_logo {
+    display: none !important;
+}

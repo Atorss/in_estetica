@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        Reglas de visibilidad:
+        - Admin/Secretaria/System: ven TODO de su company.
+        - Doctor: solo ve SUS planificaciones y SUS turnos (los que tienen
+          doctor_id.user_id = user.id).
+    -->
+
+    <!-- PLANIFICACIÓN -->
+    <record id="rule_planificacion_admin_all" model="ir.rule">
+        <field name="name">Planificación: admin/secretaria ven todo</field>
+        <field name="model_id" ref="model_in_estetica_planificacion"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[
+            (4, ref('in_estetica_core.group_administrador')),
+            (4, ref('in_estetica_core.group_secretaria')),
+            (4, ref('base.group_system')),
+        ]"/>
+    </record>
+
+    <record id="rule_planificacion_doctor" model="ir.rule">
+        <field name="name">Planificación: doctor ve solo las suyas</field>
+        <field name="model_id" ref="model_in_estetica_planificacion"/>
+        <field name="domain_force">[
+            ('doctor_id.user_id', '=', user.id),
+            ('company_id', 'in', company_ids),
+        ]</field>
+        <field name="groups" eval="[(4, ref('in_estetica_core.group_doctor'))]"/>
+    </record>
+
+    <!-- TURNO -->
+    <record id="rule_turno_admin_all" model="ir.rule">
+        <field name="name">Turno: admin/secretaria ven todo</field>
+        <field name="model_id" ref="model_in_estetica_turno"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[
+            (4, ref('in_estetica_core.group_administrador')),
+            (4, ref('in_estetica_core.group_secretaria')),
+            (4, ref('base.group_system')),
+        ]"/>
+    </record>
+
+    <record id="rule_turno_doctor" model="ir.rule">
+        <field name="name">Turno: doctor ve solo los suyos</field>
+        <field name="model_id" ref="model_in_estetica_turno"/>
+        <field name="domain_force">[
+            ('doctor_id.user_id', '=', user.id),
+            ('company_id', 'in', company_ids),
+        ]</field>
+        <field name="groups" eval="[(4, ref('in_estetica_core.group_doctor'))]"/>
+    </record>
+
+</odoo>

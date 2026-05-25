@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_tipo_cita_list" model="ir.ui.view">
+        <field name="name">in_estetica.tipo_cita.list</field>
+        <field name="model">in_estetica.tipo_cita</field>
+        <field name="arch" type="xml">
+            <list string="Tipos de cita" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="duracion_min" string="Duración (min)"/>
+                <field name="color" widget="color_picker"/>
+                <field name="precio"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tipo_cita_form" model="ir.ui.view">
+        <field name="name">in_estetica.tipo_cita.form</field>
+        <field name="model">in_estetica.tipo_cita</field>
+        <field name="arch" type="xml">
+            <form string="Tipo de cita">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Primera consulta"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="duracion_min"/>
+                            <field name="precio"/>
+                        </group>
+                        <group>
+                            <field name="color" widget="color_picker"/>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="descripcion" nolabel="1"
+                               placeholder="Descripción opcional"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tipo_cita" model="ir.actions.act_window">
+        <field name="name">Tipos de cita</field>
+        <field name="res_model">in_estetica.tipo_cita</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!--
+            Oculta el menú raíz "Employees" (HR base) a todos salvo
+            base.group_system. La gestión operativa del consultorio se hace
+            por nuestro menú "Administración → Colaboradores".
+
+            Se hace por write directo (no xpath) porque ir.ui.menu admite
+            modificar `groups_id` declarativamente.
+        -->
+        <record id="hr.menu_hr_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_system')])]"/>
+        </record>
+
+    </data>
+</odoo>

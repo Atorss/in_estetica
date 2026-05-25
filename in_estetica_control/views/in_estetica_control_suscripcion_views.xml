@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_in_estetica_control_suscripcion_list" model="ir.ui.view">
+        <field name="name">in_estetica_control.suscripcion.list</field>
+        <field name="model">in_estetica_control.suscripcion</field>
+        <field name="arch" type="xml">
+            <list string="Suscripciones" decoration-success="state == 'active'"
+                  decoration-muted="state in ('cancelled', 'expired')"
+                  decoration-warning="state == 'suspended'">
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="fecha_inicio"/>
+                <field name="fecha_fin"/>
+                <field name="ai_margin_pct" optional="hide"/>
+                <field name="tokens_disponibles_total_usd" string="Disponible USD" sum="Disponible total"/>
+                <field name="tokens_consumidos_total_usd" string="Consumido USD" sum="Consumido total"/>
+                <field name="tokens_restantes_total_usd" string="Restante USD" sum="Restante total"/>
+                <field name="recarga_count" string="# Recargas"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'active'"
+                       decoration-warning="state == 'suspended'"
+                       decoration-muted="state in ('cancelled', 'expired')"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_in_estetica_control_suscripcion_form" model="ir.ui.view">
+        <field name="name">in_estetica_control.suscripcion.form</field>
+        <field name="model">in_estetica_control.suscripcion</field>
+        <field name="arch" type="xml">
+            <form string="Suscripción">
+                <header>
+                    <button name="action_activar" type="object" string="Activar"
+                            class="btn-primary"
+                            invisible="state == 'active'"/>
+                    <button name="action_crear_primer_admin" type="object"
+                            string="Crear primer administrador" class="btn-primary"
+                            invisible="state not in ('draft', 'active') or tiene_admin_consultorio"/>
+                    <button name="action_suspender" type="object" string="Suspender"
+                            invisible="state != 'active'"/>
+                    <button name="action_cancelar" type="object" string="Cancelar"
+                            invisible="state in ('cancelled',)"
+                            confirm="¿Cancelar esta suscripción? Los usuarios de la empresa no se desactivan automáticamente al cancelar."/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,active,expired,cancelled"/>
+                </header>
+                <sheet>
+                    <field name="tiene_admin_consultorio" invisible="1"/>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_recargas" type="object"
+                                class="oe_stat_button" icon="fa-credit-card">
+                            <field name="recarga_count" widget="statinfo" string="Recargas"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Cliente">
+                            <field name="company_id" options="{'no_create': True}"/>
+                            <field name="fecha_inicio"/>
+                            <field name="fecha_fin"/>
+                        </group>
+                        <group string="Saldo IA">
+                            <field name="ai_margin_pct"
+                                   groups="in_estetica_control.group_innatum_admin"/>
+                            <field name="tokens_disponibles_total_usd" widget="monetary"
+                                   options="{'currency_field': False}"/>
+                            <field name="tokens_consumidos_total_usd" widget="monetary"
+                                   options="{'currency_field': False}"/>
+                            <field name="tokens_restantes_total_usd" widget="monetary"
+                                   options="{'currency_field': False}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Recargas">
+                            <field name="recarga_ids" nolabel="1">
+                                <list editable="bottom">
+                                    <field name="fecha"/>
+                                    <field name="monto_cobrado_usd"/>
+                                    <field name="margen_pct_aplicado" optional="hide"
+                                           groups="in_estetica_control.group_innatum_admin"/>
+                                    <field name="tokens_disponibles_usd"
+                                           groups="in_estetica_control.group_innatum_admin"/>
+                                    <field name="tokens_consumidos_usd"
+                                           groups="in_estetica_control.group_innatum_admin"/>
+                                    <field name="tokens_restantes_usd"
+                                           groups="in_estetica_control.group_innatum_admin"/>
+                                    <field name="consumido_visible_usd" string="Consumido (USD)"/>
+                                    <field name="restante_visible_usd" string="Restante (USD)"/>
+                                    <field name="state" widget="badge"
+                                           decoration-success="state == 'vigente'"
+                                           decoration-muted="state == 'agotada'"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notas">
+                            <field name="notes" nolabel="1" placeholder="Notas internas (no visibles para el cliente)"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_in_estetica_control_suscripcion" model="ir.actions.act_window">
+        <field name="name">Suscripciones</field>
+        <field name="res_model">in_estetica_control.suscripcion</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

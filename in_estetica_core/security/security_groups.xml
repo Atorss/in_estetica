@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!--
+            Categoría propia para los roles del consultorio.
+            NO usamos base.module_category_user_type ni implied_ids cruzados
+            entre los 4 grupos → Odoo los renderiza como CHECKBOXES
+            independientes en la vista de usuario (no como radio).
+        -->
+        <record id="module_category_in_estetica" model="ir.module.category">
+            <field name="name">Estética</field>
+            <field name="description">Roles del centro de medicina estética. Se pueden combinar (un mismo empleado puede ser médico y administrador, por ejemplo).</field>
+            <field name="sequence">120</field>
+        </record>
+
+        <!-- 1. Médico estético (profesional clínico principal) -->
+        <record id="group_doctor" model="res.groups">
+            <field name="name">Médico estético</field>
+            <field name="category_id" ref="module_category_in_estetica"/>
+            <field name="comment">Profesional que realiza valoraciones, consultas y tratamientos de medicina estética.</field>
+            <!-- Pueden registrar pacientes (= crear contactos) -->
+            <field name="implied_ids" eval="[(4, ref('base.group_partner_manager'))]"/>
+        </record>
+
+        <!-- 2. Secretaria / Recepción (gestión de agenda, pacientes, recepción) -->
+        <record id="group_secretaria" model="res.groups">
+            <field name="name">Secretaria / Recepción</field>
+            <field name="category_id" ref="module_category_in_estetica"/>
+            <field name="comment">Gestiona agenda, pacientes y recepción. Sin acceso a datos clínicos sensibles.</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_partner_manager'))]"/>
+        </record>
+
+        <!-- 3. Administrador del centro (NO confundir con
+             in_estetica_control.group_innatum_admin que es interno de Innatum) -->
+        <record id="group_administrador" model="res.groups">
+            <field name="name">Administrador</field>
+            <field name="category_id" ref="module_category_in_estetica"/>
+            <field name="comment">Administrador de la clínica: gestiona empleados, configuración general y permisos del resto del personal.</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_partner_manager'))]"/>
+        </record>
+
+    </data>
+</odoo>

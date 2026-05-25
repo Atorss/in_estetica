@@ -1,0 +1,62 @@
+// ============================================================
+// RENOVA Backend Theme - Override de variables primarias Odoo
+// ============================================================
+// Paleta sincronizada con el sitio web: blanco + magenta + plum.
+// El chrome oscuro (navbar/appbar) usa el plum-ink de las secciones
+// oscuras del sitio; el acento es el magenta de marca.
+// Las variables conservan el prefijo $wobbe- como namespace interno.
+
+// Paleta plum + magenta + coral (RENOVA estetica)
+$wobbe-black:          #2b1a2e;   // plum-ink (chrome oscuro, = $ink del sitio)
+$wobbe-ink:            #3a2540;
+$wobbe-charcoal:       #432b49;
+$wobbe-graphite:       #5a4560;
+$wobbe-stone:          #9c8a99;
+$wobbe-platinum:       #b63a6c;   // magenta primario (marca)
+$wobbe-platinum-light: #e58cb0;   // rosa claro
+$wobbe-platinum-dark:  #7e2a52;   // plum profundo
+$wobbe-champagne:      #ef8a6b;   // coral
+$wobbe-cream:          #fdf6f4;
+$wobbe-bone:           #fbeef0;
+$wobbe-white:          #ffffff;
+$wobbe-divider:        #f0e3ea;
+
+// Override de variables principales de Odoo
+$o-brand-odoo:                $wobbe-black;
+$o-brand-primary:             $wobbe-platinum;   // acciones/acentos = magenta
+$o-community-color:           $wobbe-black;
+$o-enterprise-color:          $wobbe-black;
+$o-enterprise-action-color:   $wobbe-platinum;
+$o-action:                    $wobbe-platinum;
+
+// Tipografia
+$o-system-fontset: ('Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+$o-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !default;
+
+// Colores de estado (mantener semantica pero suavizados)
+$o-success: #2d6a4f;
+$o-info:    $wobbe-charcoal;
+$o-warning: #b08900;
+$o-danger:  #b32d2e;
+
+// Webclient
+$o-webclient-background-color: $wobbe-cream;
+$o-view-background-color:      $wobbe-white;
+$o-main-text-color:            $wobbe-ink;
+$o-main-color-muted:           $wobbe-stone;
+
+// Navbar (chrome superior = plum, acento magenta)
+$o-navbar-background-color:    $wobbe-black;
+$o-navbar-text-color:          $wobbe-platinum-light;
+$o-navbar-active-color:        $wobbe-white;
+$o-navbar-hover-background:    rgba($wobbe-platinum, 0.14);
+$o-navbar-height:              48px;
+
+// ===== MUK appsbar (sidebar de apps) =====
+// Se sobreescriben explicitamente (sin !default) para ganar el override
+// sin depender del orden de carga en el bundle _assets_primary_variables.
+$mk-appbar-background:    $wobbe-black;        // sidebar plum-ink
+$mk-appbar-color:         #e9dfe6;             // texto claro calido
+$mk-appbar-color-hover:   $wobbe-white;
+$mk-appbar-active:        $wobbe-platinum;     // app activa = magenta
+$mk-appbar-active-border: $wobbe-platinum;

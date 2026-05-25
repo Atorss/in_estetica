@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Suscripción: usuarios internos solo ven la de su company; admin Innatum ve todas -->
+    <record id="rule_suscripcion_user_company" model="ir.rule">
+        <field name="name">Suscripción: usuario interno ve su empresa</field>
+        <field name="model_id" ref="model_in_estetica_control_suscripcion"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="rule_suscripcion_admin_all" model="ir.rule">
+        <field name="name">Suscripción: admin Innatum ve todo</field>
+        <field name="model_id" ref="model_in_estetica_control_suscripcion"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_innatum_admin'))]"/>
+    </record>
+
+    <!-- Recargas IA: igual -->
+    <record id="rule_recarga_ia_user_company" model="ir.rule">
+        <field name="name">Recarga IA: usuario interno ve su empresa</field>
+        <field name="model_id" ref="model_in_estetica_control_recarga_ia"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="rule_recarga_ia_admin_all" model="ir.rule">
+        <field name="name">Recarga IA: admin Innatum ve todo</field>
+        <field name="model_id" ref="model_in_estetica_control_recarga_ia"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_innatum_admin'))]"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_in_estetica_control_suscripcion_admin,in_estetica_control.suscripcion admin,model_in_estetica_control_suscripcion,group_innatum_admin,1,1,1,1
+access_in_estetica_control_recarga_ia_admin,in_estetica_control.recarga_ia admin,model_in_estetica_control_recarga_ia,group_innatum_admin,1,1,1,1
+access_in_estetica_control_suscripcion_user,in_estetica_control.suscripcion read,model_in_estetica_control_suscripcion,base.group_user,1,0,0,0
+access_in_estetica_control_recarga_ia_user,in_estetica_control.recarga_ia read,model_in_estetica_control_recarga_ia,base.group_user,1,0,0,0

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_turno_form_tratamiento" model="ir.ui.view">
+        <field name="name">in_estetica.turno.form.tratamiento</field>
+        <field name="model">in_estetica.turno</field>
+        <field name="inherit_id" ref="in_estetica_agenda.view_turno_form"/>
+        <field name="arch" type="xml">
+            <!-- Botón para registrar la sesión manualmente -->
+            <button name="action_finalizar" position="before">
+                <button name="action_registrar_sesion" type="object"
+                        string="Registrar sesión"
+                        invisible="not tratamiento_id or sesion_id or state != 'in_progress'"/>
+            </button>
+
+            <!-- Campo tratamiento + sesión registrada -->
+            <field name="paciente_id" position="after">
+                <!-- Tratamiento: oculto en agendamiento; editable solo al atender
+                     (en curso); solo lectura una vez atendido (registro histórico).
+                     Para citas de seguimiento viene pre-vinculado desde el botón
+                     "Agendar siguiente sesión" del tratamiento. -->
+                <field name="tratamiento_id"
+                       domain="[('paciente_id','=',paciente_id),('state','in',('en_curso','mantenimiento'))]"
+                       context="{'default_paciente_id': paciente_id, 'default_doctor_id': doctor_id}"
+                       options="{'no_quick_create': True}"
+                       invisible="state in ('available','reserved','confirmed')"
+                       readonly="state in ('done','cancelled')"
+                       placeholder="Tratamiento del paciente para esta sesión"
+                       help="Curso de sesiones del paciente. Al finalizar el turno se registra una sesión. Si no tiene tratamiento, créalo aquí con 'Crear y editar'."/>
+                <field name="sesion_id" readonly="1" invisible="not sesion_id"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

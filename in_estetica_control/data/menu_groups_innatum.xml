@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!--
+            Engancha el menú raíz "Administración" (in_estetica_control)
+            al grupo "Innatum" de la sidebar MUK, junto a AI Assistant.
+            El record y otros menús del grupo viven en muk_web_appsbar
+            (data/menu_groups_demo.xml) y en innatum_ai
+            (data/menu_groups_innatum.xml).
+
+            Usamos comando (4, id) que es aditivo: no resetea menu_ids,
+            solo agrega esta referencia al M2M existente.
+        -->
+        <record id="muk_web_appsbar.menu_group_innatum" model="ir.ui.menu.group">
+            <field name="menu_ids" eval="[
+                (4, ref('in_estetica_control.menu_in_estetica_control_root')),
+            ]"/>
+        </record>
+
+    </data>
+</odoo>

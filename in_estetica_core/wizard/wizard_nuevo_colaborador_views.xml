@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_wizard_nuevo_colaborador_form" model="ir.ui.view">
+        <field name="name">in_estetica_core.wizard_nuevo_colaborador.form</field>
+        <field name="model">in_estetica_core.wizard_nuevo_colaborador</field>
+        <field name="arch" type="xml">
+            <form string="Nuevo Colaborador">
+                <sheet>
+                    <group>
+                        <group string="Datos del colaborador">
+                            <field name="name" placeholder="Nombre y apellido"/>
+                            <field name="work_email" placeholder="colaborador@ejemplo.com"/>
+                            <field name="work_phone"/>
+                            <field name="rol" widget="radio"/>
+                        </group>
+                        <group string="Acceso al sistema">
+                            <field name="password" password="True"
+                                   placeholder="Mínimo 8 caracteres"/>
+                        </group>
+                    </group>
+                    <div class="alert alert-info" role="alert">
+                        Se creará el colaborador con un usuario propio. Compartile la contraseña inicial; debería cambiarla al primer login.
+                    </div>
+                </sheet>
+                <footer>
+                    <button name="action_crear" type="object"
+                            string="Crear colaborador" class="btn-primary"/>
+                    <button special="cancel" string="Cancelar"
+                            class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

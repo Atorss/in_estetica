@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="seq_in_estetica_control_suscripcion" model="ir.sequence">
+            <field name="name">Suscripción Innatum</field>
+            <field name="code">in_estetica_control.suscripcion</field>
+            <field name="prefix">SUSC/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+    </data>
+</odoo>

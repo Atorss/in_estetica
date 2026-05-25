@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_wizard_nuevo_colaborador_admin,wizard_nuevo_colaborador admin,model_in_estetica_core_wizard_nuevo_colaborador,group_administrador,1,1,1,1
+access_wizard_nuevo_colaborador_innatum,wizard_nuevo_colaborador innatum,model_in_estetica_core_wizard_nuevo_colaborador,in_estetica_control.group_innatum_admin,1,1,1,1
+access_wizard_nuevo_colaborador_system,wizard_nuevo_colaborador system,model_in_estetica_core_wizard_nuevo_colaborador,base.group_system,1,1,1,1
+access_hr_employee_administrador,hr.employee admin consultorio,hr.model_hr_employee,group_administrador,1,1,1,0
+access_hr_employee_innatum_admin,hr.employee admin Innatum,hr.model_hr_employee,in_estetica_control.group_innatum_admin,1,1,1,1
+access_hr_employee_doctor,hr.employee doctor lectura,hr.model_hr_employee,group_doctor,1,0,0,0
+access_hr_employee_secretaria,hr.employee secretaria lectura,hr.model_hr_employee,group_secretaria,1,0,0,0
+access_hr_employee_public_administrador,hr.employee.public admin,hr.model_hr_employee_public,group_administrador,1,0,0,0
+access_hr_employee_public_innatum,hr.employee.public innatum,hr.model_hr_employee_public,in_estetica_control.group_innatum_admin,1,0,0,0

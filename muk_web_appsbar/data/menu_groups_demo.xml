@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="menu_group_medic_administracion" model="ir.ui.menu.group">
+            <field name="name">Administración Estética</field>
+            <field name="sequence">10</field>
+            <field name="icon" type="base64" file="muk_web_appsbar/static/description/icono_grupo/administracion.png"/>
+        </record>
+
+       
+
+          <record id="menu_group_innatum" model="ir.ui.menu.group">
+            <field name="name">Innatum</field>
+            <field name="sequence">90</field>
+            <field name="icon" type="base64" file="muk_web_appsbar/static/img/iconos_grupo/innatum.png"/>
+        </record>
+
+    </data>
+</odoo>

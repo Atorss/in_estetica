@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_tipo_tratamiento_list" model="ir.ui.view">
+        <field name="name">in_estetica.tipo_tratamiento.list</field>
+        <field name="model">in_estetica.tipo_tratamiento</field>
+        <field name="arch" type="xml">
+            <list string="Tipos de tratamiento" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="categoria"/>
+                <field name="sesiones_recomendadas"/>
+                <field name="intervalo_valor"/>
+                <field name="intervalo_unidad"/>
+                <field name="requiere_retoque"/>
+                <field name="retoque_valor"/>
+                <field name="retoque_unidad"/>
+                <field name="precio" optional="hide"/>
+                <field name="active" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tipo_tratamiento_form" model="ir.ui.view">
+        <field name="name">in_estetica.tipo_tratamiento.form</field>
+        <field name="model">in_estetica.tipo_tratamiento</field>
+        <field name="arch" type="xml">
+            <form string="Tipo de tratamiento">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Ej. Botox, Láser, Exosomas"/></h1>
+                    </div>
+                    <group>
+                        <group string="Clasificación">
+                            <field name="categoria"/>
+                            <field name="precio"/>
+                            <field name="color" widget="color_picker"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Protocolo de sesiones">
+                            <field name="sesiones_recomendadas"/>
+                            <label for="intervalo_valor" string="Intervalo entre sesiones"/>
+                            <div class="o_row">
+                                <field name="intervalo_valor" class="oe_inline"/>
+                                <field name="intervalo_unidad" class="oe_inline"/>
+                            </div>
+                            <field name="requiere_retoque"/>
+                            <label for="retoque_valor" string="Intervalo de retoque"
+                                   invisible="not requiere_retoque"/>
+                            <div class="o_row" invisible="not requiere_retoque">
+                                <field name="retoque_valor" class="oe_inline"/>
+                                <field name="retoque_unidad" class="oe_inline"/>
+                            </div>
+                        </group>
+                    </group>
+                    <group string="Descripción">
+                        <field name="descripcion" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tipo_tratamiento" model="ir.actions.act_window">
+        <field name="name">Tipos de tratamiento</field>
+        <field name="res_model">in_estetica.tipo_tratamiento</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

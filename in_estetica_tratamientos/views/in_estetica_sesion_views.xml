@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_sesion_list" model="ir.ui.view">
+        <field name="name">in_estetica.tratamiento.sesion.list</field>
+        <field name="model">in_estetica.tratamiento.sesion</field>
+        <field name="arch" type="xml">
+            <list string="Sesiones">
+                <field name="fecha"/>
+                <field name="paciente_id"/>
+                <field name="tipo_tratamiento_id"/>
+                <field name="numero"/>
+                <field name="doctor_id"/>
+                <field name="producto"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_sesion_form" model="ir.ui.view">
+        <field name="name">in_estetica.tratamiento.sesion.form</field>
+        <field name="model">in_estetica.tratamiento.sesion</field>
+        <field name="arch" type="xml">
+            <form string="Sesión">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="tratamiento_id"/>
+                            <field name="numero"/>
+                            <field name="fecha"/>
+                            <field name="doctor_id"/>
+                        </group>
+                        <group>
+                            <field name="producto"/>
+                            <field name="dosis"/>
+                            <field name="turno_id" readonly="1"/>
+                            <field name="state"/>
+                        </group>
+                    </group>
+                    <group string="Observaciones">
+                        <field name="notas" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sesion" model="ir.actions.act_window">
+        <field name="name">Sesiones</field>
+        <field name="res_model">in_estetica.tratamiento.sesion</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

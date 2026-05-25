@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        Vistas PRIMARIAS (mode="primary") sobre hr.employee, exclusivas del
+        menú "Colaboradores". No tocan ni heredan de las vistas base de hr;
+        muestran solo lo que importa al consultorio.
+    -->
+
+    <record id="view_hr_employee_colaborador_list" model="ir.ui.view">
+        <field name="name">hr.employee.colaborador.list</field>
+        <field name="model">hr.employee</field>
+        <field name="mode">primary</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <list string="Colaboradores" sample="1" create="0" import="0" export_xlsx="1">
+                <field name="name"/>
+                <field name="rol"/>
+                <field name="work_email"/>
+                <field name="work_phone" optional="show"/>
+                <field name="user_id" optional="show"/>
+                <field name="active" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hr_employee_colaborador_form" model="ir.ui.view">
+        <field name="name">hr.employee.colaborador.form</field>
+        <field name="model">hr.employee</field>
+        <field name="mode">primary</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <form string="Colaborador" create="0">
+                <sheet>
+                    <field name="image_1920" widget="image" class="oe_avatar"
+                           options="{'preview_image': 'image_128'}"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del colaborador" required="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Contacto">
+                            <field name="work_email" placeholder="email@ejemplo.com"/>
+                            <field name="work_phone"/>
+                        </group>
+                        <group string="Rol y acceso">
+                            <field name="rol" widget="radio"/>
+                            <field name="user_id" readonly="1"
+                                   options="{'no_create': True}"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hr_employee_colaborador_search" model="ir.ui.view">
+        <field name="name">hr.employee.colaborador.search</field>
+        <field name="model">hr.employee</field>
+        <field name="mode">primary</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Colaboradores">
+                <field name="name"/>
+                <field name="work_email"/>
+                <field name="rol"/>
+                <separator/>
+                <filter string="Activos" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Inactivos" name="inactive" domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter string="Secretaria / Recepción" name="rol_secretaria" domain="[('rol', '=', 'secretaria')]"/>
+                <filter string="Médico estético" name="rol_doctor" domain="[('rol', '=', 'doctor')]"/>
+                <filter string="Administrador" name="rol_administrador" domain="[('rol', '=', 'administrador')]"/>
+                <group expand="0" string="Agrupar por">
+                    <filter string="Rol" name="group_rol" context="{'group_by': 'rol'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_hr_employee_colaborador" model="ir.actions.act_window">
+        <field name="name">Colaboradores</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('rol', '!=', False)]</field>
+        <field name="context">{'search_default_active': 1, 'create': False, 'edit': True, 'delete': False}</field>
+        <field name="search_view_id" ref="view_hr_employee_colaborador_search"/>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_hr_employee_colaborador_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_hr_employee_colaborador_form')}),
+        ]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aún no hay colaboradores
+            </p>
+            <p>Usá el botón <strong>Nuevo</strong> para dar de alta un colaborador. Se creará su acceso al sistema con el rol que le asignes.</p>
+        </field>
+    </record>
+
+    <!-- Override del botón "Nuevo" para abrir directamente el wizard -->
+    <record id="action_hr_employee_colaborador_open_wizard" model="ir.actions.act_window">
+        <field name="name">Nuevo Colaborador</field>
+        <field name="res_model">in_estetica_core.wizard_nuevo_colaborador</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

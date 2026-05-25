@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!--
+            Grupo MUK "Atención Clínica" — contenedor del menú raíz
+            del mismo nombre. Lo declaramos acá (no en muk_web_appsbar)
+            como extensión declarativa del módulo de terceros.
+        -->
+        <record id="menu_group_atencion_nutricional" model="ir.ui.menu.group">
+            <field name="name">Atención Clínica</field>
+            <field name="sequence">20</field>
+        </record>
+
+    </data>
+</odoo>

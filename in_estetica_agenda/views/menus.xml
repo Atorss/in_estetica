@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        Menú raíz "Agenda" en el grupo MUK "Administración Estética".
+        Acceso para médico estético, secretaria y administrador.
+    -->
+
+    <menuitem id="menu_agenda_root"
+              name="Agenda"
+              sequence="100"
+              groups="in_estetica_core.group_doctor,in_estetica_core.group_secretaria,in_estetica_core.group_administrador,base.group_system"/>
+
+    <menuitem id="menu_turnos"
+              name="Turnos"
+              parent="menu_agenda_root"
+              action="action_turno"
+              sequence="10"/>
+
+    <menuitem id="menu_pacientes"
+              name="Pacientes"
+              parent="menu_agenda_root"
+              action="action_paciente"
+              sequence="15"/>
+
+    <menuitem id="menu_planificaciones"
+              name="Planificaciones"
+              parent="menu_agenda_root"
+              action="action_planificacion"
+              sequence="20"
+              groups="in_estetica_core.group_doctor,in_estetica_core.group_secretaria,in_estetica_core.group_administrador,base.group_system"/>
+
+    <menuitem id="menu_configuracion_agenda"
+              name="Configuración"
+              parent="menu_agenda_root"
+              sequence="90"
+              groups="in_estetica_core.group_administrador,base.group_system"/>
+
+    <menuitem id="menu_tipo_cita"
+              name="Tipos de cita"
+              parent="menu_configuracion_agenda"
+              action="action_tipo_cita"
+              sequence="10"/>
+
+</odoo>

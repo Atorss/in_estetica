@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_turno_list" model="ir.ui.view">
+        <field name="name">in_estetica.turno.list</field>
+        <field name="model">in_estetica.turno</field>
+        <field name="arch" type="xml">
+            <list string="Turnos"
+                  decoration-success="state in ('confirmed', 'done')"
+                  decoration-info="state == 'reserved'"
+                  decoration-warning="state == 'in_progress'"
+                  decoration-muted="state == 'cancelled'">
+                <field name="fecha_hora"/>
+                <field name="duracion_min" string="Min" optional="hide"/>
+                <field name="doctor_id"/>
+                <field name="paciente_id"/>
+                <field name="tipo_cita_id"/>
+                <field name="state" widget="badge"
+                       decoration-success="state in ('confirmed', 'done')"
+                       decoration-info="state == 'reserved'"
+                       decoration-warning="state == 'in_progress'"
+                       decoration-muted="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_turno_form" model="ir.ui.view">
+        <field name="name">in_estetica.turno.form</field>
+        <field name="model">in_estetica.turno</field>
+        <field name="arch" type="xml">
+            <form string="Turno">
+                <header>
+                    <button name="action_reservar" type="object"
+                            string="Reservar" class="btn-primary"
+                            invisible="state != 'available'"/>
+                    <button name="action_confirmar" type="object"
+                            string="Confirmar" class="btn-primary"
+                            invisible="state not in ('reserved', 'available')"/>
+                    <button name="action_finalizar" type="object"
+                            string="Finalizar turno" class="btn-primary"
+                            invisible="state != 'in_progress'"
+                            help="Marca el turno como atendido. Si está ligado a un tratamiento, registra la sesión."/>
+                    <button name="action_liberar" type="object"
+                            string="Liberar slot"
+                            invisible="state in ('available', 'done', 'in_progress', 'cancelled')"/>
+                    <button name="action_cancelar" type="object"
+                            string="Cancelar"
+                            invisible="state in ('done', 'cancelled')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="available,reserved,confirmed,in_progress,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="doctor_id" options="{'no_create': True}"
+                                   readonly="state not in ('available',)"/>
+                            <field name="fecha_hora"/>
+                            <field name="duracion_min"/>
+                            <field name="tipo_cita_id" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="paciente_id"/>
+                            <field name="planificacion_id" readonly="1"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="notas" nolabel="1"
+                               placeholder="Observaciones del turno"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_turno_calendar" model="ir.ui.view">
+        <field name="name">in_estetica.turno.calendar</field>
+        <field name="model">in_estetica.turno</field>
+        <field name="arch" type="xml">
+            <calendar string="Agenda" date_start="fecha_hora" date_stop="fecha_hora_fin"
+                      color="color" mode="week" event_open_popup="1"
+                      quick_create="0">
+                <field name="paciente_id"/>
+                <field name="tipo_cita_id"/>
+                <field name="doctor_id"/>
+                <field name="state" invisible="1"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_turno_search" model="ir.ui.view">
+        <field name="name">in_estetica.turno.search</field>
+        <field name="model">in_estetica.turno</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="paciente_id"/>
+                <field name="doctor_id"/>
+                <field name="tipo_cita_id"/>
+                <separator/>
+                <filter string="Disponibles" name="available"
+                        domain="[('state', '=', 'available')]"/>
+                <filter string="Reservados" name="reserved"
+                        domain="[('state', '=', 'reserved')]"/>
+                <filter string="Confirmados" name="confirmed"
+                        domain="[('state', '=', 'confirmed')]"/>
+                <filter string="Hoy" name="hoy"
+                        domain="[('fecha_hora', '&gt;=', context_today().strftime('%Y-%m-%d 00:00:00')),
+                                 ('fecha_hora', '&lt;', (context_today() + relativedelta(days=1)).strftime('%Y-%m-%d 00:00:00'))]"/>
+                <separator/>
+                <filter string="Cancelados" name="cancelled"
+                        domain="[('state', '=', 'cancelled')]"/>
+                <group expand="0" string="Agrupar por">
+                    <filter string="Estado" name="g_state" context="{'group_by': 'state'}"/>
+                    <filter string="Doctor" name="g_doctor" context="{'group_by': 'doctor_id'}"/>
+                    <filter string="Tipo de cita" name="g_tipo" context="{'group_by': 'tipo_cita_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_turno" model="ir.actions.act_window">
+        <field name="name">Turnos</field>
+        <field name="res_model">in_estetica.turno</field>
+        <field name="view_mode">calendar,list,form</field>
+        <field name="search_view_id" ref="view_turno_search"/>
+        <field name="context">{'search_default_confirmed': 1, 'search_default_reserved': 1}</field>
+    </record>
+
+</odoo>

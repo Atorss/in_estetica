@@ -1,0 +1,513 @@
+// ============================================================
+// RENOVA WEB - Clinica de cirugia plastica & estetica
+// Estilo claro, luminoso y vibrante (rosa-magenta / plum / coral)
+// ============================================================
+// Fonts (Fraunces + Inter) via <link> en homepage_templates.xml.
+// Los nombres de clase mantienen el prefijo `nutri-`/`wobbe-` como
+// namespace heredado (no visible al usuario) para reutilizar el JS.
+
+// ===== PALETA =====
+$ink:            #2b1a2e;   // texto fuerte (plum-charcoal)
+$body:           #6b5a6a;   // texto cuerpo
+$muted:          #9c8a99;   // texto tenue
+$white:          #ffffff;
+$cream:          #fdf6f4;   // fondo calido
+$blush:          #fbeef0;   // blush claro
+$soft:           #f9f1f6;   // fondo seccion suave
+$line:           #f0e3ea;   // bordes/divisores
+
+$primary:        #b63a6c;   // rosa-magenta (marca)
+$primary-dark:   #7e2a52;   // plum profundo
+$primary-light:  #e58cb0;   // rosa claro
+$coral:          #ef8a6b;   // coral calido (acento)
+$peach:          #f7c6a6;   // durazno
+$gold:           #c79a4b;   // micro-acento premium
+$wa:             #25d366;   // whatsapp
+
+$grad-brand: linear-gradient(120deg, #7e2a52 0%, #b63a6c 45%, #ef8a6b 100%);
+$grad-soft:  linear-gradient(135deg, #fef3f4 0%, #f7eef7 100%);
+
+$shadow-sm:  0 2px 10px rgba(126, 42, 82, 0.06);
+$shadow:     0 18px 40px rgba(126, 42, 82, 0.10);
+$shadow-lg:  0 30px 70px rgba(126, 42, 82, 0.16);
+$radius:     18px;
+$radius-lg:  28px;
+
+$font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+$font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+// ===== WORDMARK =====
+.wobbe-brand {
+    display: inline-flex !important;
+    align-items: center;
+    text-decoration: none !important;
+    line-height: 1;
+
+    &__text {
+        display: inline-flex;
+        flex-direction: column;
+        font-family: $font-display;
+        font-weight: 700;
+        font-size: 26px;
+        letter-spacing: 0.22em;
+        color: $ink;
+        text-transform: uppercase;
+        padding-left: 0.22em;
+        transition: color 0.3s ease;
+
+        &--footer { color: $white; }
+    }
+    &__sub {
+        font-family: $font-body;
+        font-weight: 500;
+        font-size: 8.5px;
+        letter-spacing: 0.3em;
+        color: $primary;
+        margin-top: 5px;
+    }
+    &:hover .wobbe-brand__text { color: $primary; }
+    .wobbe-brand__text--footer:hover { color: $white; }
+}
+
+// ===== BASE =====
+.nutri-home {
+    font-family: $font-body;
+    color: $body;
+    background: $white;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+    line-height: 1.65;
+
+    img { max-width: 100%; }
+    h1, h2, h3, h4, h5 { font-family: $font-display; color: $ink; font-weight: 600; }
+    p { color: $body; }
+    em { font-style: italic; color: $primary; }
+}
+
+// ===== BOTONES =====
+.nutri-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-body;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 15px 30px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+    letter-spacing: 0.2px;
+
+    &--accent {
+        background: $grad-brand;
+        color: $white !important;
+        box-shadow: 0 12px 26px rgba(182, 58, 108, 0.32);
+        &:hover { transform: translateY(-3px); box-shadow: 0 18px 36px rgba(182, 58, 108, 0.40); color: $white !important; }
+    }
+    &--wa {
+        background: $wa;
+        color: $white !important;
+        box-shadow: 0 12px 26px rgba(37, 211, 102, 0.28);
+        &:hover { transform: translateY(-3px); box-shadow: 0 18px 36px rgba(37, 211, 102, 0.38); }
+    }
+    &--ghost {
+        background: transparent;
+        color: $primary !important;
+        border: 1.5px solid rgba(182, 58, 108, 0.35);
+        &:hover { background: $primary; color: $white !important; border-color: $primary; transform: translateY(-3px); }
+    }
+}
+
+// ===== TOP BAR =====
+.nutri-topbar {
+    background: $ink;
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
+    padding: 9px 0;
+
+    &__inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    &__info { display: flex; gap: 22px; flex-wrap: wrap; }
+    &__item { color: rgba(255,255,255,0.82); text-decoration: none; i { color: $primary-light; margin-right: 6px; } }
+    &__right { display: flex; align-items: center; gap: 18px; }
+    &__wa {
+        color: $white; text-decoration: none; font-weight: 600;
+        background: rgba(37, 211, 102, 0.18); border: 1px solid rgba(37, 211, 102, 0.5);
+        padding: 4px 14px; border-radius: 999px;
+        i { color: $wa; margin-right: 6px; }
+        &:hover { background: $wa; color: $white; }
+    }
+    &__social { display: flex; gap: 14px;
+        a { color: rgba(255,255,255,0.7); &:hover { color: $primary-light; } }
+    }
+}
+
+// ===== HERO =====
+.nutri-hero {
+    position: relative;
+    background: $grad-soft;
+    padding: 90px 0 130px;
+    overflow: hidden;
+
+    &__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+    &__blob {
+        position: absolute; border-radius: 50%; filter: blur(10px); opacity: 0.55;
+        &--1 { width: 460px; height: 460px; top: -140px; right: -90px;
+            background: radial-gradient(circle at 30% 30%, rgba(229,140,176,0.65), rgba(239,138,107,0.15)); }
+        &--2 { width: 360px; height: 360px; bottom: -120px; left: -100px;
+            background: radial-gradient(circle at 50% 50%, rgba(247,198,166,0.55), rgba(247,198,166,0)); }
+        &--3 { width: 240px; height: 240px; top: 40%; right: 30%;
+            background: radial-gradient(circle at 50% 50%, rgba(182,58,108,0.18), rgba(182,58,108,0)); }
+    }
+    .container { position: relative; z-index: 2; }
+
+    &__badge {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: $white; color: $primary-dark;
+        padding: 8px 18px; border-radius: 999px;
+        font-size: 12.5px; font-weight: 600; letter-spacing: 0.5px;
+        box-shadow: $shadow-sm; margin-bottom: 26px;
+        i { color: $coral; }
+    }
+    &__title {
+        font-size: 60px; line-height: 1.05; font-weight: 600;
+        color: $ink; margin-bottom: 22px; letter-spacing: -1px;
+    }
+    &__desc { font-size: 18px; color: $body; max-width: 540px; margin-bottom: 34px; }
+    &__cta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 30px; }
+    &__trust {
+        display: flex; gap: 24px; flex-wrap: wrap;
+        span { font-size: 13.5px; color: $ink; font-weight: 500;
+            i { color: $primary; margin-right: 7px; } }
+    }
+
+    // Tarjeta lateral
+    &__card {
+        background: $white; border-radius: $radius-lg; padding: 34px;
+        box-shadow: $shadow-lg; position: relative;
+        border: 1px solid rgba(255,255,255,0.8);
+        &::before { content:''; position:absolute; inset:0; border-radius:$radius-lg;
+            padding:1.5px; background:$grad-brand; -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+            -webkit-mask-composite:xor; mask-composite:exclude; opacity:0.5; pointer-events:none; }
+    }
+    &__card-tag { display:inline-block; font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase;
+        color:$primary; background:$blush; padding:5px 12px; border-radius:999px; margin-bottom:14px; }
+    &__card-top h3 { font-size:24px; margin-bottom:10px; }
+    &__card-top p { font-size:15px; margin-bottom:24px; }
+    &__card-stats {
+        display:flex; justify-content:space-between; gap:10px;
+        padding:22px 0; border-top:1px solid $line; border-bottom:1px solid $line; margin-bottom:22px;
+        > div { text-align:center; flex:1; }
+        small { display:block; font-size:11px; color:$muted; margin-top:4px; line-height:1.3; }
+    }
+    &__plus { font-family:$font-display; font-size:26px; font-weight:700; color:$coral; vertical-align:top; }
+    &__card-link { color:$primary; font-weight:600; text-decoration:none; font-size:15px;
+        &:hover { color:$primary-dark; } }
+    &__wave { display:none; }
+}
+.nutri-stat__num { font-family:$font-display; font-size:34px; font-weight:700; color:$primary-dark; line-height:1; }
+
+// ===== SECTIONS =====
+.nutri-section {
+    padding: 96px 0;
+    &--soft { background: $soft; }
+    &--cta { background: $grad-brand; padding: 90px 0; }
+
+    &__header {
+        text-align: center; max-width: 680px; margin: 0 auto 56px;
+        &--left { text-align: left; margin: 0 0 32px; }
+    }
+    &__tag {
+        display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: 2px;
+        text-transform: uppercase; color: $primary;
+        background: $blush; padding: 6px 16px; border-radius: 999px; margin-bottom: 18px;
+    }
+    &__title { font-size: 42px; line-height: 1.12; margin-bottom: 16px; }
+    &__desc { font-size: 17px; color: $body; }
+}
+
+// ===== TARJETAS DE TRATAMIENTOS =====
+.nutri-card {
+    background: $white; border: 1px solid $line; border-radius: $radius-lg;
+    padding: 34px 30px; height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: $shadow-sm;
+
+    &__icon {
+        width: 64px; height: 64px; border-radius: 18px; display: flex; align-items: center; justify-content: center;
+        font-size: 26px; color: $white; margin-bottom: 22px;
+        box-shadow: 0 10px 22px rgba(182, 58, 108, 0.22);
+        &--a { background: linear-gradient(135deg, #b63a6c, #e58cb0); }
+        &--b { background: linear-gradient(135deg, #ef8a6b, #f7c6a6); }
+        &--c { background: linear-gradient(135deg, #7e2a52, #b63a6c); }
+        &--d { background: linear-gradient(135deg, #c79a4b, #ef8a6b); }
+        &--e { background: linear-gradient(135deg, #b63a6c, #ef8a6b); }
+        &--f { background: linear-gradient(135deg, #7e2a52, #e58cb0); }
+    }
+    &__title { font-size: 21px; margin-bottom: 10px; }
+    &__text { font-size: 15px; margin-bottom: 16px; }
+    &__list {
+        list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px;
+        li { font-size: 12.5px; color: $primary-dark; background: $blush; padding: 5px 12px; border-radius: 999px; font-weight: 500; }
+    }
+    &:hover { transform: translateY(-8px); box-shadow: $shadow-lg; border-color: transparent; }
+}
+
+// ===== PILARES / PROMESAS =====
+.nutri-pillar-card {
+    background: $white; border-radius: $radius-lg; padding: 32px 26px; height: 100%;
+    text-align: center; box-shadow: $shadow-sm; border: 1px solid $line;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &__ic {
+        width: 70px; height: 70px; margin: 0 auto 18px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 28px; color: $primary; background: $blush;
+    }
+    h4 { font-size: 19px; margin-bottom: 10px; }
+    p { font-size: 14.5px; }
+    &:hover { transform: translateY(-6px); box-shadow: $shadow;
+        .nutri-pillar-card__ic { background: $grad-brand; color: $white; } }
+}
+
+// ===== PROCESO / STEPS =====
+.nutri-step {
+    background: $white; border-radius: $radius-lg; padding: 34px 28px; height: 100%;
+    position: relative; box-shadow: $shadow-sm; border: 1px solid $line; overflow: hidden;
+    &__num {
+        font-family: $font-display; font-size: 52px; font-weight: 700;
+        background: $grad-brand; -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent; line-height: 1; display: block; margin-bottom: 14px;
+    }
+    h4 { font-size: 20px; margin-bottom: 10px; }
+    p { font-size: 14.5px; }
+    &:hover { box-shadow: $shadow; transform: translateY(-6px); }
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+// ===== ANTES / DESPUES =====
+.nutri-ba-slider {
+    position: relative; width: 100%; aspect-ratio: 4/3; border-radius: $radius-lg;
+    overflow: hidden; box-shadow: $shadow-lg; cursor: ew-resize; user-select: none;
+    background: $blush;
+
+    &__before, &__after { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 22px; }
+    &__before { background: linear-gradient(135deg, #d9c2cd 0%, #b89aac 100%); }
+    &__after  { background: $grad-brand; clip-path: inset(0 0 0 50%); }
+    &__label {
+        font-family: $font-body; font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;
+        color: $white; background: rgba(0,0,0,0.25); padding: 6px 14px; border-radius: 999px; backdrop-filter: blur(4px);
+        &--after { margin-left: auto; }
+    }
+    &__handle {
+        position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; background: $white;
+        transform: translateX(-50%); display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 0 14px rgba(0,0,0,0.25);
+        i { background: $white; color: $primary; width: 44px; height: 44px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; box-shadow: $shadow; font-size: 16px; }
+    }
+    &--visible &__handle i { animation: baPulse 1.2s ease 2; }
+}
+@keyframes baPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+
+// ===== ESPECIALISTA =====
+.nutri-doctor {
+    background: $white; border-radius: $radius-lg; overflow: hidden; box-shadow: $shadow-lg;
+    &__photo {
+        position: relative; min-height: 460px; height: 100%;
+        background: $grad-brand; display: flex; align-items: center; justify-content: center;
+        &::after { content:''; position:absolute; top:26px; left:26px; right:26px; bottom:26px;
+            border:1px solid rgba(255,255,255,0.3); border-radius:18px; }
+    }
+    &__monogram span {
+        font-family: $font-display; font-size: 190px; font-weight: 700; color: rgba(255,255,255,0.92); line-height: 1;
+        text-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    &__body { padding: 54px 50px; }
+    &__name { font-size: 36px; margin: 12px 0 4px; }
+    &__role { color: $primary; font-weight: 600; font-size: 16px; margin-bottom: 20px; }
+    &__bio { font-size: 16px; margin-bottom: 24px; }
+    &__creds {
+        display: flex; flex-direction: column; gap: 14px; margin-bottom: 30px;
+        > div { display: flex; align-items: center; gap: 14px; font-size: 15px; color: $ink; }
+        i { color: $primary; width: 38px; height: 38px; background: $blush; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    }
+    &__cta { display: flex; gap: 14px; flex-wrap: wrap; }
+}
+
+// ===== TESTIMONIOS =====
+.nutri-testimonial {
+    background: $white; border-radius: $radius-lg; padding: 32px 28px; height: 100%;
+    box-shadow: $shadow-sm; border: 1px solid $line;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &__stars { color: $gold; margin-bottom: 16px; i { margin-right: 2px; } }
+    &__text { font-size: 15.5px; color: $ink; font-style: italic; margin-bottom: 22px; }
+    &__author { display: flex; align-items: center; gap: 14px;
+        strong { display: block; color: $ink; font-size: 15px; }
+        small { color: $muted; font-size: 13px; } }
+    &__avatar {
+        width: 46px; height: 46px; border-radius: 50%; background: $grad-brand; color: $white;
+        display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; flex-shrink: 0;
+    }
+    &:hover { transform: translateY(-6px); box-shadow: $shadow; }
+}
+
+// ===== CONTACTO / RESERVA =====
+.nutri-contact-card {
+    background: $white; border-radius: $radius-lg; overflow: hidden; box-shadow: $shadow-lg;
+}
+.nutri-contact-info {
+    background: $ink; color: rgba(255,255,255,0.82); padding: 50px 42px; height: 100%;
+    &__tag { display:inline-block; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+        color:$primary-light; margin-bottom:14px; }
+    &__title { color: $white; font-size: 30px; margin-bottom: 16px; }
+    &__lead { font-size: 15px; margin-bottom: 26px; color: rgba(255,255,255,0.75); }
+    &__list { list-style: none; padding: 0; margin: 0 0 26px;
+        li { font-size: 14.5px; margin-bottom: 14px; color: rgba(255,255,255,0.85);
+            i { color: $primary-light; width: 22px; } } }
+    &__social { display: flex; gap: 12px;
+        a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); color: $white;
+            display: flex; align-items: center; justify-content: center; text-decoration: none;
+            &:hover { background: $primary; } } }
+}
+
+// ===== WIZARD =====
+.nutri-wizard {
+    padding: 44px 40px; background: $white;
+    &__progress { display: flex; gap: 8px; margin-bottom: 30px; }
+    &__step-pill {
+        flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px;
+        font-size: 12px; font-weight: 600; color: $muted; position: relative;
+        span { width: 30px; height: 30px; border-radius: 50%; background: $soft; color: $muted;
+            display: flex; align-items: center; justify-content: center; font-size: 13px; transition: all 0.3s ease; }
+        &.is-active { color: $primary; span { background: $grad-brand; color: $white; } }
+        &.is-done span { background: $primary-light; color: $white; }
+    }
+    &__step { display: none; animation: wizFade 0.4s ease; &.is-active { display: block; } }
+    &__title { font-size: 22px; margin-bottom: 18px; color: $ink; }
+    &__hint { font-size: 14px; color: $muted; margin-bottom: 16px; }
+    &__loading { text-align: center; padding: 40px; color: $primary; font-size: 26px; }
+    &__empty { text-align: center; color: $muted; padding: 30px; }
+
+    &__tipos { display: flex; flex-direction: column; gap: 12px; }
+    &__tipo {
+        text-align: left; background: $white; border: 1.5px solid $line; border-radius: $radius;
+        padding: 16px 18px; cursor: pointer; transition: all 0.25s ease; position: relative; width: 100%;
+        &-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        &-name { font-weight: 600; color: $ink; font-size: 16px; }
+        &-dur { font-size: 12px; color: $primary; background: $blush; padding: 3px 10px; border-radius: 999px; }
+        &-desc { font-size: 13px; color: $muted; margin: 6px 0 0; }
+        &-arrow { position: absolute; right: 16px; bottom: 14px; color: $primary; opacity: 0; transition: all 0.25s ease; }
+        &:hover { border-color: $primary; box-shadow: $shadow-sm; transform: translateX(3px);
+            .nutri-wizard__tipo-arrow { opacity: 1; } }
+    }
+
+    &__slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
+    &__slot {
+        background: $white; border: 1.5px solid $line; border-radius: 12px; padding: 12px 8px; cursor: pointer;
+        display: flex; flex-direction: column; align-items: center; gap: 2px; transition: all 0.2s ease;
+        &-hora { font-weight: 700; color: $ink; font-size: 16px; }
+        &-doc { font-size: 11px; color: $muted; text-align: center; }
+        &:hover { border-color: $primary; background: $blush; transform: translateY(-2px); }
+    }
+
+    &__summary { background: $soft; border-radius: $radius; padding: 16px 18px; margin-bottom: 18px; }
+    &__sum-row { display: flex; justify-content: space-between; font-size: 14px; padding: 4px 0;
+        span { color: $muted; } strong { color: $ink; } }
+
+    &__input {
+        width: 100%; border: 1.5px solid $line; border-radius: 12px; padding: 12px 14px; font-size: 14px;
+        font-family: $font-body; color: $ink; background: $white; transition: border-color 0.2s ease;
+        &:focus { outline: none; border-color: $primary; box-shadow: 0 0 0 3px rgba(182,58,108,0.1); }
+        &.is-loading { background: $soft; }
+    }
+    &__msg { display: none; padding: 11px 14px; border-radius: 10px; font-size: 14px; margin-top: 14px;
+        &.is-error { display: block; background: #fde8e8; color: #b32d2e; }
+        &.is-success { display: block; background: #e6f6ec; color: #1f7a44; } }
+
+    &__actions { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 22px; }
+    &__back { background: none; border: none; color: $muted; font-weight: 600; font-size: 14px; cursor: pointer;
+        &:hover { color: $primary; } }
+
+    &__success { text-align: center; padding: 26px 10px;
+        > i { font-size: 60px; color: $wa; margin-bottom: 14px; }
+        h4 { font-size: 24px; margin-bottom: 14px; color: $ink; } }
+    &__success-body { text-align: left; background: $soft; border-radius: $radius; padding: 18px; margin-bottom: 20px;
+        p { font-size: 14px; } }
+}
+@keyframes wizFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+// ===== CALENDARIO =====
+.nutri-cal {
+    &__head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    &__nav { background: $blush; border: none; color: $primary; width: 34px; height: 34px; border-radius: 50%;
+        cursor: pointer; transition: all 0.2s ease;
+        &:hover:not(:disabled) { background: $primary; color: $white; }
+        &:disabled { opacity: 0.35; cursor: not-allowed; } }
+    &__title { font-family: $font-display; font-weight: 600; color: $ink; font-size: 17px; text-transform: capitalize; }
+    &__dow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 6px;
+        span { text-align: center; font-size: 11px; font-weight: 700; color: $muted; } }
+    &__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+    &__cell {
+        aspect-ratio: 1; border: none; background: $soft; border-radius: 10px; font-size: 14px; color: $ink;
+        cursor: pointer; transition: all 0.2s ease;
+        &.is-blank { background: transparent; pointer-events: none; }
+        &.is-past, &.is-disabled { color: #d4c6cf; background: transparent; cursor: not-allowed; }
+        &.is-available { background: $blush; color: $primary-dark; font-weight: 700;
+            &:hover { background: $grad-brand; color: $white; transform: scale(1.06); } }
+    }
+}
+
+// ===== FOOTER =====
+.nutri-footer {
+    background: $ink; color: rgba(255,255,255,0.7); padding: 70px 0 26px;
+    &__info p { color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; }
+    &__title { color: $white; font-size: 16px; font-family: $font-body; font-weight: 700; margin-bottom: 18px; }
+    &__links { list-style: none; padding: 0; margin: 0;
+        li { margin-bottom: 10px; }
+        a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s ease;
+            &:hover { color: $primary-light; } } }
+    &__social { display: flex; gap: 12px; margin-top: 16px;
+        a { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.1); color: $white;
+            display: flex; align-items: center; justify-content: center; text-decoration: none;
+            &:hover { background: $primary; } } }
+    &__bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 44px; padding-top: 22px; text-align: center;
+        p { font-size: 13px; color: rgba(255,255,255,0.5); margin: 0; } }
+}
+
+// ===== CURSOR CUSTOM =====
+.nutri-cursor {
+    position: fixed; top: 0; left: 0; width: 32px; height: 32px; border: 1.5px solid rgba(182,58,108,0.6);
+    border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.12s ease, width 0.2s ease, height 0.2s ease, opacity 0.3s ease;
+    &--hover { width: 52px; height: 52px; background: rgba(182,58,108,0.08); border-color: $primary; }
+    &__dot { position: fixed; top: 0; left: 0; width: 6px; height: 6px; background: $primary; border-radius: 50%;
+        pointer-events: none; z-index: 9999; }
+}
+@media (pointer: coarse) { .nutri-cursor, .nutri-cursor__dot { display: none; } }
+
+// ===== SPLIT TEXT =====
+.nutri-word { display: inline-block; }
+.nutri-char { display: inline-block; }
+
+// ===== RESPONSIVE =====
+@media (max-width: 991px) {
+    .nutri-hero { padding: 60px 0 90px; }
+    .nutri-hero__title { font-size: 44px; }
+    .nutri-hero__card { margin-top: 40px; }
+    .nutri-section { padding: 70px 0; }
+    .nutri-section__title { font-size: 34px; }
+    .nutri-doctor__photo { min-height: 320px; }
+    .nutri-doctor__monogram span { font-size: 130px; }
+    .nutri-doctor__body { padding: 40px 32px; }
+    .nutri-contact-info { padding: 40px 32px; }
+    .nutri-wizard { padding: 36px 28px; }
+}
+@media (max-width: 575px) {
+    .nutri-hero__title { font-size: 36px; }
+    .nutri-section__title { font-size: 28px; }
+    .nutri-topbar__info { display: none; }
+    .nutri-hero__cta { flex-direction: column; .nutri-btn { width: 100%; } }
+    .nutri-section { padding: 56px 0; }
+}

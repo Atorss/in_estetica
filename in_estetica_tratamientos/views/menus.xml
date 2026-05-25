@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        Menú raíz "Tratamientos" (el corazón del sistema). Acceso para
+        médico estético, secretaria y administrador. Se engancha al grupo
+        MUK vía post_init_hook.
+    -->
+    <menuitem id="menu_tratamientos_root"
+              name="Tratamientos"
+              sequence="105"
+              groups="in_estetica_core.group_doctor,in_estetica_core.group_secretaria,in_estetica_core.group_administrador,base.group_system"/>
+
+    <menuitem id="menu_tratamientos"
+              name="Tratamientos"
+              parent="menu_tratamientos_root"
+              action="action_in_estetica_tratamiento"
+              sequence="10"/>
+
+    <menuitem id="menu_pendientes"
+              name="Pendientes de contactar"
+              parent="menu_tratamientos_root"
+              action="action_in_estetica_tratamiento_pendientes"
+              sequence="20"/>
+
+    <menuitem id="menu_sesiones"
+              name="Sesiones"
+              parent="menu_tratamientos_root"
+              action="action_sesion"
+              sequence="30"/>
+
+    <menuitem id="menu_config_tratamientos"
+              name="Configuración"
+              parent="menu_tratamientos_root"
+              sequence="90"
+              groups="in_estetica_core.group_administrador,base.group_system"/>
+
+    <menuitem id="menu_tipos_tratamiento"
+              name="Tipos de tratamiento"
+              parent="menu_config_tratamientos"
+              action="action_tipo_tratamiento"
+              sequence="10"/>
+
+</odoo>

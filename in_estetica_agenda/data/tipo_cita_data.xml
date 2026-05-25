@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tipo_cita_primera" model="in_estetica.tipo_cita">
+            <field name="name">Valoración estética</field>
+            <field name="sequence">10</field>
+            <field name="duracion_min">45</field>
+            <field name="color">2</field>
+            <field name="descripcion">Primera valoración: análisis facial/corporal, historia clínica, objetivos y plan de tratamiento personalizado.</field>
+        </record>
+
+        <record id="tipo_cita_control" model="in_estetica.tipo_cita">
+            <field name="name">Sesión de tratamiento</field>
+            <field name="sequence">20</field>
+            <field name="duracion_min">45</field>
+            <field name="color">10</field>
+            <field name="descripcion">Sesión de un tratamiento de medicina estética (toxina botulínica, rellenos, peeling, láser, etc.).</field>
+        </record>
+
+        <record id="tipo_cita_estetica" model="in_estetica.tipo_cita">
+            <field name="name">Control / seguimiento</field>
+            <field name="sequence">30</field>
+            <field name="duracion_min">30</field>
+            <field name="color">4</field>
+            <field name="descripcion">Revisión de resultados, retoques y mantenimiento del tratamiento.</field>
+        </record>
+
+        <record id="tipo_cita_online" model="in_estetica.tipo_cita">
+            <field name="name">Consulta online</field>
+            <field name="sequence">40</field>
+            <field name="duracion_min">30</field>
+            <field name="color">5</field>
+            <field name="descripcion">Valoración inicial por videollamada.</field>
+        </record>
+
+    </data>
+</odoo>

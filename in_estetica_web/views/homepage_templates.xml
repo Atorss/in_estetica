@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- HEAD: Google Fonts (Fraunces display + Inter body)           -->
+    <!-- ============================================================ -->
+    <template id="estetica_fonts" name="Estetica - Google Fonts" inherit_id="website.layout" customize_show="True">
+        <xpath expr="//head" position="inside">
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
+            <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&amp;family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+        </xpath>
+    </template>
+
+    <!-- ============================================================ -->
+    <!-- BRAND: Wordmark RENOVA en el navbar                          -->
+    <!-- ============================================================ -->
+    <template id="estetica_brand" name="Estetica - Wordmark" inherit_id="website.option_header_brand_logo" customize_show="True">
+        <xpath expr="//a[@data-name='Navbar Logo']" position="replace">
+            <a data-name="Navbar Logo" href="/" t-attf-class="navbar-brand logo wobbe-brand #{_link_class}">
+                <span class="wobbe-brand__text">
+                    RENOVA<span class="wobbe-brand__sub">Medicina Estetica</span>
+                </span>
+            </a>
+        </xpath>
+    </template>
+
+    <!-- ============================================================ -->
+    <!-- HOMEPAGE                                                     -->
+    <!-- ============================================================ -->
+    <template id="estetica_homepage" name="Estetica - Pagina Principal">
+        <t t-call="website.layout">
+            <t t-set="no_header" t-value="False"/>
+            <div id="wrap" class="nutri-home">
+
+                <!-- ===== TOP BAR ===== -->
+                <div class="nutri-topbar">
+                    <div class="container">
+                        <div class="nutri-topbar__inner">
+                            <div class="nutri-topbar__info">
+                                <a href="https://maps.google.com" target="_blank" class="nutri-topbar__item">
+                                    <i class="fa fa-map-marker"/> Guayaquil &amp; Online
+                                </a>
+                                <span class="nutri-topbar__item">
+                                    <i class="fa fa-clock-o"/> Lun-Vie 9:00-19:00 &#183; Sab 9:00-13:00
+                                </span>
+                            </div>
+                            <div class="nutri-topbar__right">
+                                <a href="https://wa.me/593990000000" target="_blank" class="nutri-topbar__wa">
+                                    <i class="fa fa-whatsapp"/> Asesoria gratis
+                                </a>
+                                <div class="nutri-topbar__social">
+                                    <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i class="fa fa-instagram"/></a>
+                                    <a href="#" aria-label="Facebook"><i class="fa fa-facebook"/></a>
+                                    <a href="#" aria-label="TikTok"><i class="fa fa-music"/></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== HERO ===== -->
+                <section class="nutri-hero">
+                    <div class="nutri-hero__bg">
+                        <span class="nutri-hero__blob nutri-hero__blob--1"/>
+                        <span class="nutri-hero__blob nutri-hero__blob--2"/>
+                        <span class="nutri-hero__blob nutri-hero__blob--3"/>
+                    </div>
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-7">
+                                <span class="nutri-hero__badge"><i class="fa fa-star"/> Medicina Estetica</span>
+                                <h1 class="nutri-hero__title">Realza tu belleza, <em>sin cirugia</em></h1>
+                                <p class="nutri-hero__desc">
+                                    Tratamientos faciales y corporales personalizados, con criterio
+                                    medico y resultados naturales. Procedimientos minimamente
+                                    invasivos, ambulatorios y con recuperacion rapida.
+                                </p>
+                                <div class="nutri-hero__cta">
+                                    <a href="#contacto" class="nutri-btn nutri-btn--accent">
+                                        Agenda tu valoracion <i class="fa fa-arrow-right ms-2"/>
+                                    </a>
+                                    <a href="https://wa.me/593990000000" target="_blank" class="nutri-btn nutri-btn--wa">
+                                        <i class="fa fa-whatsapp me-2"/>Escríbenos
+                                    </a>
+                                </div>
+                                <div class="nutri-hero__trust">
+                                    <span><i class="fa fa-check-circle"/> Medico estetico certificado</span>
+                                    <span><i class="fa fa-check-circle"/> Productos avalados</span>
+                                    <span><i class="fa fa-check-circle"/> Resultados naturales</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="nutri-hero__card">
+                                    <div class="nutri-hero__card-top">
+                                        <span class="nutri-hero__card-tag">Primera cita</span>
+                                        <h3>Valoracion personalizada</h3>
+                                        <p>Conversamos sobre lo que buscas y definimos un plan realista y seguro para ti.</p>
+                                    </div>
+                                    <div class="nutri-hero__card-stats">
+                                        <div>
+                                            <span class="nutri-stat__num">15</span><span class="nutri-hero__plus">+</span>
+                                            <small>Anos de experiencia</small>
+                                        </div>
+                                        <div>
+                                            <span class="nutri-stat__num">3000</span><span class="nutri-hero__plus">+</span>
+                                            <small>Procedimientos</small>
+                                        </div>
+                                        <div>
+                                            <span class="nutri-stat__num">99</span><span class="nutri-hero__plus">%</span>
+                                            <small>Satisfaccion</small>
+                                        </div>
+                                    </div>
+                                    <a href="#contacto" class="nutri-hero__card-link">Reservar ahora <i class="fa fa-long-arrow-right ms-1"/></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nutri-hero__wave"/>
+                </section>
+
+                <!-- ===== TRATAMIENTOS ===== -->
+                <section id="servicios" class="nutri-section">
+                    <div class="container">
+                        <div class="nutri-section__header">
+                            <span class="nutri-section__tag">Tratamientos</span>
+                            <h2 class="nutri-section__title">Nuestros tratamientos</h2>
+                            <p class="nutri-section__desc">
+                                Medicina estetica facial y corporal. Cada tratamiento se
+                                personaliza segun tu piel y tus objetivos, con productos avalados.
+                            </p>
+                        </div>
+                        <div class="row g-4 nutri-cards">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="nutri-card">
+                                    <div class="nutri-card__icon nutri-card__icon--a"><i class="fa fa-magic"/></div>
+                                    <h4 class="nutri-card__title">Toxina botulinica</h4>
+                                    <p class="nutri-card__text">Suaviza arrugas de expresion y previene su formacion.</p>
+                                    <ul class="nutri-card__list">
+                                        <li>Frente</li><li>Entrecejo</li><li>Patas de gallo</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="nutri-card">
+                                    <div class="nutri-card__icon nutri-card__icon--b"><i class="fa fa-tint"/></div>
+                                    <h4 class="nutri-card__title">Rellenos &amp; acido hialuronico</h4>
+                                    <p class="nutri-card__text">Volumen, hidratacion y definicion de contornos.</p>
+                                    <ul class="nutri-card__list">
+                                        <li>Labios</li><li>Surcos</li><li>Pomulos</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="nutri-card">
+                                    <div class="nutri-card__icon nutri-card__icon--c"><i class="fa fa-star-o"/></div>
+                                    <h4 class="nutri-card__title">Bioestimuladores</h4>
+                                    <p class="nutri-card__text">Estimulan tu propio colageno para una piel firme.</p>
+                                    <ul class="nutri-card__list">
+                                        <li>Colageno</li><li>Firmeza</li><li>Rejuvenecimiento</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="nutri-card">
+                                    <div class="nutri-card__icon nutri-card__icon--d"><i class="fa fa-leaf"/></div>
+                                    <h4 class="nutri-card__title">Peelings &amp; limpieza facial</h4>
+                                    <p class="nutri-card__text">Renovacion de la piel, luminosidad y control del acne.</p>
+                                    <ul class="nutri-card__list">
+                                        <li>Peeling</li><li>Hydrafacial</li><li>Acne</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="nutri-card">
+                                    <div class="nutri-card__icon nutri-card__icon--e"><i class="fa fa-sun-o"/></div>
+                                    <h4 class="nutri-card__title">Laser &amp; manchas</h4>
+                                    <p class="nutri-card__text">Depilacion, manchas y fotorejuvenecimiento de la piel.</p>
+                                    <ul class="nutri-card__list">
+                                        <li>Depilacion</li><li>Manchas</li><li>Fotorejuvenecimiento</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="nutri-card">
+                                    <div class="nutri-card__icon nutri-card__icon--f"><i class="fa fa-heartbeat"/></div>
+                                    <h4 class="nutri-card__title">Tratamientos corporales</h4>
+                                    <p class="nutri-card__text">Reduccion de medidas, celulitis y flacidez corporal.</p>
+                                    <ul class="nutri-card__list">
+                                        <li>Reduccion</li><li>Celulitis</li><li>Flacidez</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== PROMESAS / POR QUE ===== -->
+                <section class="nutri-section nutri-section--soft">
+                    <div class="container">
+                        <div class="nutri-section__header">
+                            <span class="nutri-section__tag">Por que elegirnos</span>
+                            <h2 class="nutri-section__title">Tu seguridad, primero</h2>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="nutri-pillar-card">
+                                    <span class="nutri-pillar-card__ic"><i class="fa fa-certificate"/></span>
+                                    <h4>Productos avalados</h4>
+                                    <p>Solo marcas certificadas (CE/FDA) y reconocidas. Tu seguridad primero.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="nutri-pillar-card">
+                                    <span class="nutri-pillar-card__ic"><i class="fa fa-leaf"/></span>
+                                    <h4>Resultados naturales</h4>
+                                    <p>Buscamos armonia, no exageracion. Que el resultado se vea y se sienta tuyo.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="nutri-pillar-card">
+                                    <span class="nutri-pillar-card__ic"><i class="fa fa-user-md"/></span>
+                                    <h4>Atencion personalizada</h4>
+                                    <p>Cada tratamiento se ajusta a tu piel y tus objetivos. Sin formulas genericas.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="nutri-pillar-card">
+                                    <span class="nutri-pillar-card__ic"><i class="fa fa-clock-o"/></span>
+                                    <h4>Recuperacion rapida</h4>
+                                    <p>Procedimientos ambulatorios y minimamente invasivos. Vuelve a tu rutina enseguida.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== PROCESO ===== -->
+                <section id="metodologia" class="nutri-section">
+                    <div class="container">
+                        <div class="nutri-section__header">
+                            <span class="nutri-section__tag">El proceso</span>
+                            <h2 class="nutri-section__title">Como trabajamos</h2>
+                            <p class="nutri-section__desc">Cuatro etapas pensadas para tu seguridad y para un resultado que se mantenga en el tiempo.</p>
+                        </div>
+                        <div class="row g-4 nutri-steps">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="nutri-step">
+                                    <span class="nutri-step__num">01</span>
+                                    <h4>Valoracion</h4>
+                                    <p>Analisis de tu piel y rostro, historia clinica y objetivos para recomendarte el mejor tratamiento.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="nutri-step">
+                                    <span class="nutri-step__num">02</span>
+                                    <h4>Plan personalizado</h4>
+                                    <p>Definimos los tratamientos, el numero de sesiones y un presupuesto claro y transparente.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="nutri-step">
+                                    <span class="nutri-step__num">03</span>
+                                    <h4>Tratamiento</h4>
+                                    <p>Sesion ambulatoria en consultorio, sin ingreso y con minima molestia.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="nutri-step">
+                                    <span class="nutri-step__num">04</span>
+                                    <h4>Seguimiento</h4>
+                                    <p>Control de resultados, retoques y un plan de mantenimiento a tu medida.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== ANTES / DESPUES ===== -->
+                <section class="nutri-section nutri-section--soft">
+                    <div class="container">
+                        <div class="row align-items-center g-5">
+                            <div class="col-lg-6">
+                                <div class="nutri-section__header nutri-section__header--left">
+                                    <span class="nutri-section__tag">Casos de exito</span>
+                                    <h2 class="nutri-section__title">Resultados que hablan</h2>
+                                    <p class="nutri-section__desc">
+                                        Arrastra el control para comparar. Cada caso es real y se logra
+                                        con planificacion individual. (Imagenes referenciales — se
+                                        reemplazan por casos reales con consentimiento del paciente.)
+                                    </p>
+                                </div>
+                                <a href="#contacto" class="nutri-btn nutri-btn--accent">Quiero mi valoracion</a>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="nutri-ba-slider">
+                                    <div class="nutri-ba-slider__before"><span class="nutri-ba-slider__label">Antes</span></div>
+                                    <div class="nutri-ba-slider__after"><span class="nutri-ba-slider__label nutri-ba-slider__label--after">Despues</span></div>
+                                    <div class="nutri-ba-slider__handle"><i class="fa fa-arrows-h"/></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== ESPECIALISTA ===== -->
+                <section id="equipo" class="nutri-section">
+                    <div class="container">
+                        <div class="nutri-doctor">
+                            <div class="row g-0 align-items-stretch">
+                                <div class="col-lg-5">
+                                    <div class="nutri-doctor__photo">
+                                        <div class="nutri-doctor__monogram"><span>R</span></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="nutri-doctor__body">
+                                        <span class="nutri-section__tag">El especialista</span>
+                                        <h2 class="nutri-doctor__name">Dr. Nombre Apellido</h2>
+                                        <p class="nutri-doctor__role">Especialista en Medicina Estetica</p>
+                                        <p class="nutri-doctor__bio">
+                                            Mas de una decada dedicada a la medicina estetica con un principio
+                                            claro: resultados naturales y seguridad ante todo. Cada rostro se
+                                            estudia de forma individual, con criterio medico y un trato cercano.
+                                        </p>
+                                        <div class="nutri-doctor__creds">
+                                            <div><i class="fa fa-graduation-cap"/><span>Formacion en medicina estetica facial y corporal</span></div>
+                                            <div><i class="fa fa-certificate"/><span>Productos y protocolos certificados (CE/FDA)</span></div>
+                                            <div><i class="fa fa-shield"/><span>Atencion personalizada y segura</span></div>
+                                        </div>
+                                        <div class="nutri-doctor__cta">
+                                            <a href="#contacto" class="nutri-btn nutri-btn--accent">Agendar con el especialista</a>
+                                            <a href="https://www.instagram.com" target="_blank" class="nutri-btn nutri-btn--ghost"><i class="fa fa-instagram me-2"/>Instagram</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== TESTIMONIOS ===== -->
+                <section class="nutri-section nutri-section--soft">
+                    <div class="container">
+                        <div class="nutri-section__header">
+                            <span class="nutri-section__tag">Testimonios</span>
+                            <h2 class="nutri-section__title">Lo que dicen nuestros pacientes</h2>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="nutri-testimonial">
+                                    <div class="nutri-testimonial__stars"><i class="fa fa-star"/><i class="fa fa-star"/><i class="fa fa-star"/><i class="fa fa-star"/><i class="fa fa-star"/></div>
+                                    <p class="nutri-testimonial__text">"Me senti acompanada en todo el proceso. El resultado es natural y justo lo que buscaba."</p>
+                                    <div class="nutri-testimonial__author">
+                                        <span class="nutri-testimonial__avatar">MJ</span>
+                                        <div><strong>Maria J.</strong><small>Toxina botulinica</small></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="nutri-testimonial">
+                                    <div class="nutri-testimonial__stars"><i class="fa fa-star"/><i class="fa fa-star"/><i class="fa fa-star"/><i class="fa fa-star"/><i class="fa fa-star"/></div>
+                                    <p class="nutri-testimonial__text">"Profesionalismo y honestidad desde la primera cita. Explican todo con claridad."</p>
+                                    <div class="nutri-testimonial__author">
+                                        <span class="nutri-testimonial__avatar">CA</span>
+                                        <div><strong>Carla A.</strong><small>Rellenos / Acido hialuronico</small></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="nutri-testimonial">
+                                    <div class="nutri-testimonial__stars"><i class="fa fa-star"/><i class="fa fa-star"/><i class="fa fa-star"/><i class="fa fa-star"/><i class="fa fa-star"/></div>
+                                    <p class="nutri-testimonial__text">"El seguimiento fue impecable. Me senti segura y comoda en cada sesion."</p>
+                                    <div class="nutri-testimonial__author">
+                                        <span class="nutri-testimonial__avatar">DV</span>
+                                        <div><strong>Daniela V.</strong><small>Laser &amp; manchas</small></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== CTA / RESERVA (WIZARD) ===== -->
+                <section id="contacto" class="nutri-section nutri-section--cta">
+                    <div class="container">
+                        <div class="nutri-contact-card">
+                            <div class="row g-0">
+                                <div class="col-lg-5">
+                                    <div class="nutri-contact-info">
+                                        <span class="nutri-contact-info__tag">Empieza hoy</span>
+                                        <h3 class="nutri-contact-info__title">Agenda tu valoracion</h3>
+                                        <p class="nutri-contact-info__lead">
+                                            El primer paso es una valoracion honesta. Reserva tu cita y
+                                            conversemos sobre lo que buscas. Te respondemos en menos de 24h.
+                                        </p>
+                                        <ul class="nutri-contact-info__list">
+                                            <li><i class="fa fa-map-marker"/> Guayaquil, Ecuador</li>
+                                            <li><i class="fa fa-whatsapp"/> +593 99 000 0000</li>
+                                            <li><i class="fa fa-envelope"/> contacto@renova.clinic</li>
+                                            <li><i class="fa fa-clock-o"/> Lun-Vie 9:00-19:00 / Sab 9:00-13:00</li>
+                                        </ul>
+                                        <div class="nutri-contact-info__social">
+                                            <a href="#" aria-label="Instagram"><i class="fa fa-instagram"/></a>
+                                            <a href="#" aria-label="Facebook"><i class="fa fa-facebook"/></a>
+                                            <a href="https://wa.me/593990000000" target="_blank" aria-label="WhatsApp"><i class="fa fa-whatsapp"/></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="nutri-wizard" id="nutri_wizard">
+                                        <div class="nutri-wizard__progress">
+                                            <div class="nutri-wizard__step-pill is-active" data-step="1"><span>1</span>Tipo</div>
+                                            <div class="nutri-wizard__step-pill" data-step="2"><span>2</span>Fecha</div>
+                                            <div class="nutri-wizard__step-pill" data-step="3"><span>3</span>Hora</div>
+                                            <div class="nutri-wizard__step-pill" data-step="4"><span>4</span>Datos</div>
+                                        </div>
+
+                                        <div class="nutri-wizard__step is-active" data-step="1">
+                                            <h4 class="nutri-wizard__title">Elige el tipo de consulta</h4>
+                                            <div class="nutri-wizard__tipos" id="nutri_tipos">
+                                                <div class="nutri-wizard__loading"><i class="fa fa-circle-o-notch fa-spin"/></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="nutri-wizard__step" data-step="2">
+                                            <h4 class="nutri-wizard__title">Elige el dia</h4>
+                                            <p class="nutri-wizard__hint">Solo aparecen disponibles los dias con horarios libres.</p>
+                                            <div class="nutri-wizard__calendar" id="nutri_calendar">
+                                                <div class="nutri-wizard__loading"><i class="fa fa-circle-o-notch fa-spin"/></div>
+                                            </div>
+                                            <div class="nutri-wizard__actions">
+                                                <button type="button" class="nutri-wizard__back" data-action="back"><i class="fa fa-arrow-left me-2"/>Atras</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="nutri-wizard__step" data-step="3">
+                                            <h4 class="nutri-wizard__title">Elige el horario</h4>
+                                            <p class="nutri-wizard__hint" id="nutri_slots_hint"/>
+                                            <div class="nutri-wizard__slots" id="nutri_slots">
+                                                <div class="nutri-wizard__loading"><i class="fa fa-circle-o-notch fa-spin"/></div>
+                                            </div>
+                                            <div class="nutri-wizard__actions">
+                                                <button type="button" class="nutri-wizard__back" data-action="back"><i class="fa fa-arrow-left me-2"/>Atras</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="nutri-wizard__step" data-step="4">
+                                            <h4 class="nutri-wizard__title">Tus datos</h4>
+                                            <div class="nutri-wizard__summary" id="nutri_summary"/>
+                                            <div class="row g-2">
+                                                <div class="col-md-6"><input type="text" class="nutri-wizard__input" name="cedula" placeholder="Cedula"/></div>
+                                                <div class="col-md-6"><input type="tel" class="nutri-wizard__input" name="telefono" placeholder="Telefono"/></div>
+                                                <div class="col-md-6"><input type="text" class="nutri-wizard__input" name="nombre" placeholder="Nombre"/></div>
+                                                <div class="col-md-6"><input type="text" class="nutri-wizard__input" name="apellido" placeholder="Apellido"/></div>
+                                                <div class="col-12"><input type="email" class="nutri-wizard__input" name="email" placeholder="Email"/></div>
+                                                <div class="col-12"><textarea class="nutri-wizard__input" name="notas" placeholder="Motivo o notas (opcional)" rows="2"/></div>
+                                            </div>
+                                            <div class="nutri-wizard__msg" id="nutri_wizard_msg"/>
+                                            <div class="nutri-wizard__actions">
+                                                <button type="button" class="nutri-wizard__back" data-action="back"><i class="fa fa-arrow-left me-2"/>Atras</button>
+                                                <button type="button" class="nutri-btn nutri-btn--accent" id="nutri_wizard_submit">Confirmar reserva</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="nutri-wizard__step" data-step="5">
+                                            <div class="nutri-wizard__success" id="nutri_wizard_success">
+                                                <i class="fa fa-check-circle"/>
+                                                <h4>Reserva confirmada</h4>
+                                                <div class="nutri-wizard__success-body" id="nutri_success_body"/>
+                                                <button type="button" class="nutri-btn nutri-btn--ghost" id="nutri_wizard_reset">Nueva reserva</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </t>
+    </template>
+
+    <!-- ============================================================ -->
+    <!-- FOOTER                                                       -->
+    <!-- ============================================================ -->
+    <template id="estetica_footer" name="Estetica Footer" inherit_id="website.layout" customize_show="True">
+        <xpath expr="//div[@id='footer']" position="replace">
+            <div id="footer">
+                <footer class="nutri-footer">
+                    <div class="container">
+                        <div class="row g-4">
+                            <div class="col-lg-4">
+                                <span class="wobbe-brand__text wobbe-brand__text--footer">
+                                    RENOVA<span class="wobbe-brand__sub">Medicina Estetica</span>
+                                </span>
+                                <div class="nutri-footer__info mt-3">
+                                    <p>Medicina estetica facial y corporal con criterio medico.</p>
+                                    <p>Guayaquil, Ecuador &amp; Online</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-6">
+                                <h3 class="nutri-footer__title">Navegacion</h3>
+                                <ul class="nutri-footer__links">
+                                    <li><a href="/">Inicio</a></li>
+                                    <li><a href="/#servicios">Tratamientos</a></li>
+                                    <li><a href="/#metodologia">Proceso</a></li>
+                                    <li><a href="/#equipo">Especialista</a></li>
+                                    <li><a href="/#contacto">Contacto</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 col-6">
+                                <h3 class="nutri-footer__title">Tratamientos</h3>
+                                <ul class="nutri-footer__links">
+                                    <li><a href="/#servicios">Toxina botulinica</a></li>
+                                    <li><a href="/#servicios">Rellenos faciales</a></li>
+                                    <li><a href="/#servicios">Peelings &amp; limpieza</a></li>
+                                    <li><a href="/#servicios">Laser &amp; corporales</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3">
+                                <h3 class="nutri-footer__title">Contacto</h3>
+                                <div class="nutri-footer__info">
+                                    <p><i class="fa fa-whatsapp me-2"/>+593 99 000 0000</p>
+                                    <p><i class="fa fa-envelope me-2"/>contacto@renova.clinic</p>
+                                    <p><i class="fa fa-clock-o me-2"/>Lun-Vie 9:00-19:00</p>
+                                </div>
+                                <div class="nutri-footer__social">
+                                    <a href="#" aria-label="Instagram"><i class="fa fa-instagram"/></a>
+                                    <a href="#" aria-label="Facebook"><i class="fa fa-facebook"/></a>
+                                    <a href="https://wa.me/593990000000" target="_blank" aria-label="WhatsApp"><i class="fa fa-whatsapp"/></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nutri-footer__bottom">
+                            <p>&#169; 2026 RENOVA. Todos los derechos reservados.</p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_in_estetica_tratamiento_list" model="ir.ui.view">
+        <field name="name">in_estetica.tratamiento.list</field>
+        <field name="model">in_estetica.tratamiento</field>
+        <field name="arch" type="xml">
+            <list string="Tratamientos"
+                  decoration-danger="alerta == 'vencida'"
+                  decoration-warning="alerta == 'por_vencer'"
+                  decoration-muted="state in ('completado','cancelado')">
+                <field name="name"/>
+                <field name="paciente_id"/>
+                <field name="tipo_tratamiento_id"/>
+                <field name="doctor_id" optional="show"/>
+                <field name="progreso" widget="progressbar"/>
+                <field name="progreso_label" string="Sesiones"/>
+                <field name="ultima_sesion_fecha" optional="show"/>
+                <field name="proxima_sesion_fecha"/>
+                <field name="alerta" widget="badge"
+                       decoration-danger="alerta == 'vencida'"
+                       decoration-warning="alerta == 'por_vencer'"
+                       decoration-success="alerta == 'al_dia'"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'en_curso'"
+                       decoration-info="state == 'mantenimiento'"
+                       decoration-muted="state in ('completado','cancelado','pausado')"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_in_estetica_tratamiento_kanban" model="ir.ui.view">
+        <field name="name">in_estetica.tratamiento.kanban</field>
+        <field name="model">in_estetica.tratamiento</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="tipo_tratamiento_id" class="o_kanban_small_column">
+                <field name="alerta"/>
+                <field name="progreso"/>
+                <field name="progreso_label"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_card oe_kanban_global_click" style="padding:10px;">
+                            <div class="o_kanban_record_title">
+                                <strong><field name="paciente_id"/></strong>
+                            </div>
+                            <div class="text-muted o_kanban_record_subtitle">
+                                <field name="tipo_tratamiento_id"/>
+                            </div>
+                            <div class="mt-2">
+                                <i class="fa fa-check-circle me-1" style="color:#b63a6c;" title="Sesiones"/>
+                                <span class="badge text-bg-light"><field name="progreso_label"/> sesiones</span>
+                            </div>
+                            <div class="mt-2">
+                                <i class="fa fa-calendar-o me-1" title="Próxima sesión"/><field name="proxima_sesion_fecha"/>
+                                <span t-if="record.alerta.raw_value == 'vencida'" class="badge text-bg-danger ms-1">Vencida</span>
+                                <span t-if="record.alerta.raw_value == 'por_vencer'" class="badge text-bg-warning ms-1">Por vencer</span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_in_estetica_tratamiento_form" model="ir.ui.view">
+        <field name="name">in_estetica.tratamiento.form</field>
+        <field name="model">in_estetica.tratamiento</field>
+        <field name="arch" type="xml">
+            <form string="Tratamiento">
+                <header>
+                    <button name="action_agendar_siguiente" type="object"
+                            string="Agendar siguiente sesión" class="btn-primary"
+                            invisible="state in ('completado','cancelado')"/>
+                    <button name="action_pausar" type="object" string="Pausar"
+                            invisible="state != 'en_curso'"/>
+                    <button name="action_reactivar" type="object" string="Reactivar"
+                            invisible="state != 'pausado'"/>
+                    <button name="action_cancelar" type="object" string="Cancelar"
+                            invisible="state in ('cancelado',)"
+                            confirm="¿Cancelar este tratamiento?"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="en_curso,mantenimiento,completado"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Paciente y tratamiento">
+                            <field name="paciente_id"/>
+                            <field name="tipo_tratamiento_id"/>
+                            <field name="doctor_id"/>
+                            <field name="fecha_inicio"/>
+                        </group>
+                        <group string="Progreso">
+                            <field name="sesiones_totales"/>
+                            <field name="progreso_label" string="Sesiones realizadas"/>
+                            <field name="progreso" widget="progressbar"/>
+                            <field name="ultima_sesion_fecha"/>
+                            <field name="proxima_sesion_fecha"/>
+                            <field name="proxima_es_retoque"/>
+                            <field name="alerta" widget="badge"
+                                   decoration-danger="alerta == 'vencida'"
+                                   decoration-warning="alerta == 'por_vencer'"
+                                   decoration-success="alerta == 'al_dia'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Sesiones">
+                            <field name="sesion_ids">
+                                <list editable="bottom">
+                                    <field name="numero"/>
+                                    <field name="fecha"/>
+                                    <field name="doctor_id"/>
+                                    <field name="producto"/>
+                                    <field name="dosis"/>
+                                    <field name="notas"/>
+                                    <field name="turno_id" readonly="1" optional="hide"/>
+                                    <field name="state" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notas">
+                            <field name="notas" nolabel="1" placeholder="Notas internas del tratamiento"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_in_estetica_tratamiento_search" model="ir.ui.view">
+        <field name="name">in_estetica.tratamiento.search</field>
+        <field name="model">in_estetica.tratamiento</field>
+        <field name="arch" type="xml">
+            <search string="Tratamientos">
+                <field name="paciente_id"/>
+                <field name="tipo_tratamiento_id"/>
+                <field name="doctor_id"/>
+                <separator/>
+                <filter string="Próxima vencida" name="vencida" domain="[('alerta','=','vencida')]"/>
+                <filter string="Por vencer (7 días)" name="por_vencer" domain="[('alerta','=','por_vencer')]"/>
+                <separator/>
+                <filter string="En curso" name="en_curso" domain="[('state','=','en_curso')]"/>
+                <filter string="Mantenimiento" name="mantenimiento" domain="[('state','=','mantenimiento')]"/>
+                <filter string="Completados" name="completado" domain="[('state','=','completado')]"/>
+                <group expand="0" string="Agrupar por">
+                    <filter string="Tipo de tratamiento" name="g_tipo" context="{'group_by': 'tipo_tratamiento_id'}"/>
+                    <filter string="Paciente" name="g_pac" context="{'group_by': 'paciente_id'}"/>
+                    <filter string="Estado de la próxima" name="g_alerta" context="{'group_by': 'alerta'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_in_estetica_tratamiento" model="ir.actions.act_window">
+        <field name="name">Tratamientos</field>
+        <field name="res_model">in_estetica.tratamiento</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="search_view_id" ref="view_in_estetica_tratamiento_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Registra el primer tratamiento</p>
+            <p>Lleva el control de las sesiones de cada paciente por tipo de tratamiento.</p>
+        </field>
+    </record>
+
+    <!-- Acción "Pendientes": próximas sesiones por vencer o vencidas -->
+    <record id="action_in_estetica_tratamiento_pendientes" model="ir.actions.act_window">
+        <field name="name">Pendientes de contactar</field>
+        <field name="res_model">in_estetica.tratamiento</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="domain">[('alerta','in',('vencida','por_vencer'))]</field>
+        <field name="context">{'search_default_g_alerta': 1}</field>
+        <field name="search_view_id" ref="view_in_estetica_tratamiento_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Sin pendientes</p>
+            <p>Aquí aparecen los pacientes a quienes toca contactar para su próxima sesión o retoque.</p>
+        </field>
+    </record>
+
+</odoo>

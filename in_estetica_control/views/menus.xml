@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_in_estetica_control_root"
+              name="Administración"
+              sequence="100"
+              groups="group_innatum_admin"/>
+
+    <menuitem id="menu_in_estetica_control_suscripciones"
+              name="Suscripciones"
+              parent="menu_in_estetica_control_root"
+              action="action_in_estetica_control_suscripcion"
+              sequence="10"/>
+
+    <menuitem id="menu_in_estetica_control_recargas"
+              name="Recargas IA"
+              parent="menu_in_estetica_control_root"
+              action="action_in_estetica_control_recarga_ia"
+              sequence="20"/>
+
+</odoo>
